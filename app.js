@@ -14,10 +14,10 @@ app.set("views", path.join(__dirname, "views"));
 connection = dbConnection.connect();
 
 app.get("/", function(req, res) {
-  res.sendFile(__dirname + + '/index.html');
   connection.query("SELECT * FROM pet", function(err, rows, fields) {
     if (!err) {
       console.log("Success");
+      res.render('calendar', {data:rows});
     } else {
       console.log("Error while performing Query.");
     }
