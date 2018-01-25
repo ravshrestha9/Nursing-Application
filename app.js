@@ -12,7 +12,6 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 connection = dbConnection.connect();
-
 app.get("/", function(req, res) {
   connection.query("SELECT * FROM pet", function(err, rows, fields) {
     if (!err) {
@@ -24,6 +23,4 @@ app.get("/", function(req, res) {
   });
 });
 
-app.listen(3000, function(err){
-  console.log(err);
-});
+app.listen(3000);

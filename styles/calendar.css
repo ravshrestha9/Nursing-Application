@@ -1,28 +1,45 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: lighter; 
-    width: 80%;
+    width: 98%;
     margin: 0 auto;
 }
 h3{
-    font-size: 3vw;
+    font-size: 2vw;
     text-align: center;
+    font-weight: lighter;
 }
 
 table {
     width: 100%;
     border: 1px solid silver;
     border-collapse: collapse;
-    text-align: center;    
+        
 }
 
 table tr td{
     width: 100px;
-    height: 100px;
+    height: 110px;
     border: 1px solid silver;
+    font-weight: bold;
+    vertical-align: top;
+    margin:0;
+    padding: 4px 0px 0px 4px;
 }
 
-/* 
 table tr:first-child td{
     height: 50px;
-} */
+    color: gray;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* style add button */
+#add {
+    position: absolute;
+    z-index: 100;
+    bottom: 50px;
+    right: 50px;
+}
