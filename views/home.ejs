@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src='../scripts/main.js'></script>
+</head>
+
+<body>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Button
+    </button>
+    <div class="container">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>Owner</td>
+                <td>Species</td>
+                <td>Sex</td>
+                <td>Age</td>
+                <td>Friends</td>
+            </tr>
+            <%data.forEach(function(element){%>
+                <tr>
+                    <td>
+                        <%=element.name%>
+                    </td>
+                    <td>
+                        <%=element.owner%>
+                    </td>
+                    <td>
+                        <%=element.species%>
+                    </td>
+                    <td>
+                        <%=element.sex%>
+                    </td>
+                    <td>
+                        <%=element.age%>
+                    </td>
+                    <td>
+                        <%=element.friends%>
+                    </td>
+                    <%});%>
+                </tr>
+        </table>
+    </div>
+</body>
+
+</html>

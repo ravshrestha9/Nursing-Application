@@ -1,0 +1,28 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter; 
+    width: 80%;
+    margin: 0 auto;
+}
+h3{
+    font-size: 3vw;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border: 1px solid silver;
+    border-collapse: collapse;
+    text-align: center;    
+}
+
+table tr td{
+    width: 100px;
+    height: 100px;
+    border: 1px solid silver;
+}
+
+/* 
+table tr:first-child td{
+    height: 50px;
+} */
