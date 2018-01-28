@@ -1,1 +1,3 @@
-let rooms = ['308','318','309','215'];
+document.getElementById("add").onclick = function(){
+    location.href = "form.ejs";
+}
