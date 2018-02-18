@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "material-ui": "^1.0.0-beta.34",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-icons-next": "^1.0.0-beta.17-next",
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-big-calendar": "^0.18.0",
