@@ -14,7 +14,15 @@ import "./Home.css";
 class Home extends Component {
   constructor() {
     super();
-    this.state = { events: {}, openForm: false };
+    this.state = { 
+        events: {},
+        openForm: false, 
+        openRequestForm: false
+    };
+  }
+
+  handleClick(){
+    this.setState({openRequestForm: true});
   }
 
   render() {
@@ -28,9 +36,12 @@ class Home extends Component {
             color="secondary"
             aria-label="add"
             id="addCourse"
+            onClick={this.handleClick()}
           >
             <AddIcon />
           </Button>
+          
+
         </div>
         </div>
     );

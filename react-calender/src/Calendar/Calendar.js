@@ -9,15 +9,25 @@ import "./Calendar.css";
 BigCalendar.momentLocalizer(moment);
 
 class Calendar extends Component {
-  state = {
-    selectedDay: ""
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      events: [],
+      selectedDay: ""
+    };
+  }
+
+  componentWillMount(){
+    //database call to get the list of events
+    //eventList = getEvents()
+    //this.state.events = eventList
+  }
 
   render() {
     return (
         <BigCalendar
           selectable
-          events={[]}
+          events={this.state.events}
           defaultView="month"
           defaultDate={new Date()}
           onNavigate={date => {
