@@ -29,7 +29,7 @@ import "./MenuBar.css";
 // }
 
 const MenuBar = toolbar => {
-
+  console.log(toolbar);
   const goToBack = () => {
     if (toolbar.view == "day") {
       toolbar.date.setDate(toolbar.date.getDate() - 1);
@@ -126,19 +126,15 @@ const MenuBar = toolbar => {
           </Typography>
       
           <Select
-            value={'Month'}            
-            inputProps={{
-              name: 'age',
-              id: 'age-simple',
-            }}
-            defaultValue = {"Month"}
+            value={toolbar.view}            
+            defaultValue = {"month"}
             style= {{width:"170px", color:"white", textAlign:"center"}}
             onChange = {handleChangeView}
           >
-            <MenuItem value="Month">Month</MenuItem>
-            <MenuItem value="Week">Week</MenuItem>
-            <MenuItem value="Day">Day</MenuItem>
-            <MenuItem value="Agenda">Agenda</MenuItem>
+            <MenuItem value="month">Month</MenuItem>
+            <MenuItem value="week">Week</MenuItem>
+            <MenuItem value="day">Day</MenuItem>
+            <MenuItem value="agenda">Agenda</MenuItem>
           </Select>
            
           <Button color="inherit">Login</Button>

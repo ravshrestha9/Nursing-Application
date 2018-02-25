@@ -1,11 +1,5 @@
 import React, {Component} from 'react'
-import BigCalendar from 'react-big-calendar'
-import moment from 'moment'
-import Calendar from './Calendar/Calendar';
-import Modal from './Calendar/Modal';
-import Form from './Calendar/Form';
 import Home from './Home/Home';
-//import Fetch 
 
 class App extends Component {
   constructor(){
@@ -27,11 +21,8 @@ class App extends Component {
     return (
       <div>
       <div className="App">
-        {
           <Home/>
-         // <Modal/>
-          //<Form/> 
-        }        
+
       </div>
       </div>
     );
