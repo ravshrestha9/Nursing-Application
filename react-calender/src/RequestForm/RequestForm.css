@@ -1,0 +1,14 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+div{
+
+
+    /* width:auto; */
+}
+md-dialog {
+    max-width : 95% !important;  
+    max-height : 95% !important; 
+  }

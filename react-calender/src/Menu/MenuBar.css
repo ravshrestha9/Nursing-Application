@@ -1,0 +1,39 @@
+
+ *{
+    margin:0;
+    padding:0;
+
+ }
+.root {
+    margin-bottom:3px;
+    /* flex-grow: 1; */
+  }
+
+.flex {
+    flex: 1;
+  }
+
+.menuButton {
+    margin-left: -12;
+    margin-right: 20;
+  } 
+
+ .dateLabel {
+     margin-left: 30px;
+     display: inline-block; 
+} 
+
+.navigateButtons{
+    margin-left: 30px;
+}
+
+ #back, #next{
+    fill: #fff;
+    background: transparent;
+    color:white;
+    box-shadow:none;
+}
+
+#back:hover, #next:hover{
+    background: rgb(112, 157, 216);
+}
