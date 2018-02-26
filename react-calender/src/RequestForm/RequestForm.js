@@ -11,14 +11,20 @@ import { MenuItem } from "material-ui/Menu";
 import Dialog from "material-ui/Dialog";
 import { Button } from "material-ui/Button";
 
-import "./Form.css";
+import "./RequestForm.css";
 
 class RequestForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: 1,
-      open: false
+      open: false,
+      courseName: '',
+      crn: '',
+      semester: '',
+      day:'',
+      time: '',
+      notes: '',   
     };
   }
 
@@ -26,7 +32,13 @@ class RequestForm extends React.Component {
   //     this.setState({open: this.props.showForm});
   // }
 
-  handleChange = (event) => this.setState({ value: event.target.value });
+  //handleChange = (event) => this.setState({ value: event.target.value });
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
 
   handleClose = () => {
     this.setState({ open: false });
@@ -47,16 +59,33 @@ class RequestForm extends React.Component {
         onClose={this.handleClose.bind(this)}
         fullScreen= {false}
         style={{
-          height: "100vh !important",
-          maxHeight: "100vh",
-          textAlign: "center"
+          textAlign: "center",
+          
         }}
       >
-          <Select
+         <TextField
+          id="courseName"
+          label="Course"
+          value={this.state.name}
+          onChange={this.handleChange('name')}
+          margin="normal"
+          style = {{width: '150px'}}
+        />
+        
+        <TextField
+          id="crn"
+          label="CRN"
+          value={this.state.name}
+          onChange={this.handleChange('name')}
+          margin="normal"
+          style = {{width: '300px'}}
+        />
+
+        <Select
           value={this.state.value}
           onChange={this.handleChange}
-          style={{ width: 300 }}
-          autoWidth={false}
+          // style={{ width: 500 }}
+          autoWidth={true}
           openImmediately={false}
           >
           <MenuItem value={0}>Select Semester</MenuItem>
@@ -66,6 +95,17 @@ class RequestForm extends React.Component {
           <MenuItem value={4}>Semester 4</MenuItem>
           <MenuItem value={5}>Semester 5</MenuItem>
         </Select>
+        
+        <TextField
+          id="courseName"
+          label="Day of Class"
+          value={this.state.name}
+          onChange={this.handleChange('name')}
+          margin="normal"
+          style = {{width: '10px'}}
+        />   
+      
+          
       </Dialog>
     );
   }
