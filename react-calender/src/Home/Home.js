@@ -7,7 +7,8 @@ import IconButton from "material-ui/IconButton";
 import MenuIcon from "material-ui-icons/Menu";
 import Calendar from "../Calendar/Calendar";
 import AddIcon from "material-ui-icons/Add";
-import RequestForm from "../RequestForm/RequestForm";
+// import RequestForm from "../RequestForm/RequestForm";
+import EventForm from "../EventForm/EventForm";
 import "./Home.css";
 
 class Home extends Component {
@@ -15,17 +16,17 @@ class Home extends Component {
     super();
     this.state = { 
         events: {},
-        openRequestForm: false
+        openEventForm: false
     };
   }
 
-  handleOpenRequestForm(){
-    this.setState({openRequestForm: true});
-    console.log(this.state.openRequestForm);
+  handleOpenEventForm(){
+    this.setState({openEventForm: true});
+    console.log(this.state.openEventForm);
   }
 
-  handleCloseRequestForm(){
-    this.setState({openRequestForm: false});
+  handleCloseEventForm(){
+    this.setState({openEventForm: false});
   } 
 
   render() {
@@ -39,11 +40,11 @@ class Home extends Component {
             color="secondary"
             aria-label="add"
             id="addCourse"
-            onClick={this.handleOpenRequestForm.bind(this)}
+            onClick={this.handleOpenEventForm.bind(this)}
           >
             <AddIcon />
           </Button>
-         <RequestForm open={this.state.openRequestForm} closeForm = {this.handleCloseRequestForm.bind(this)}/>
+         <EventForm open={this.state.openEventForm} closeForm = {this.handleCloseEventForm.bind(this)}/>
         </div>
         </div>
     );

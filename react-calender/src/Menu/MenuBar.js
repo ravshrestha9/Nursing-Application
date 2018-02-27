@@ -19,7 +19,6 @@ import Drawers from "./Drawers";
 import {MenuItem} from "material-ui/Menu";
 import "./MenuBar.css";
 
-
 // class MenuBar extends Component {
 //   constructor(props){
 //     super(props);
@@ -29,7 +28,6 @@ import "./MenuBar.css";
 // }
 
 const MenuBar = toolbar => {
-  console.log(toolbar);
   const goToBack = () => {
     if (toolbar.view == "day") {
       toolbar.date.setDate(toolbar.date.getDate() - 1);
@@ -43,7 +41,7 @@ const MenuBar = toolbar => {
     }
   };
 
-  const goToNext = () => {
+const goToNext = () => {
     if (toolbar.view == "day") {
       toolbar.date.setDate(toolbar.date.getDate() + 1);
       toolbar.onNavigate("next");
@@ -56,14 +54,14 @@ const MenuBar = toolbar => {
     }
   };
 
-  const goToCurrent = () => {
+const goToCurrent = () => {
     const now = new Date();
     toolbar.date.setMonth(now.getMonth());
     toolbar.date.setYear(now.getFullYear());
     toolbar.onNavigate("current");
   };
 
-  const label = () => {
+const label = () => {
     const date = moment(toolbar.date);
     return (
       <span>
@@ -73,12 +71,12 @@ const MenuBar = toolbar => {
     );
   };
 
-  const handleChangeView = (event)=>{
+const handleChangeView = (event)=>{
     let view = event.target.value;  
     toolbar.onViewChange(view.toLowerCase());
-  }
+}
 
-  return (
+return (
     <div className="root">
       <AppBar position="static">
         <Toolbar>
