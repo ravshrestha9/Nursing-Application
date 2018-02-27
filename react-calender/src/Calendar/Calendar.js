@@ -4,7 +4,7 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import MenuBar from "../Menu/MenuBar";
-import events from './events';
+
 import "./Calendar.css";
 
 BigCalendar.momentLocalizer(moment);
@@ -14,31 +14,13 @@ class Calendar extends Component {
   constructor(props){
     super(props);
     this.state = {
-      events: events,
+      events: [],
       selectedDay: ""
     };
   }
 
-  componentWillMount(){
-    //api call to get the list of events
-    fetch('http://35.185.78.228/calendar/events')
-    .then((resp)=>{
-      return resp.json();      
-    })
-    .then((jsonData)=>{
-      let newEvents = jsonData.map((event)=>{
-        return {
-          id: (event.EventScheduleId + 20),
-          title: event.Title || event.Course,
-          start: new Date(event.EventStart),
-          end: new Date(event.EventEnd)
-        };
-      });
-      this.setState({events: events.concat(newEvents)});
-    })
-    .catch((err)=>{
-      console.err("Error parsing response: " + err);
-    });
+  componentWillReceiveProps(newProps) {
+    this.setState({ events: newProps.events });
   }
 
 

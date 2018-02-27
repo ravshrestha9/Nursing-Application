@@ -12,7 +12,7 @@
     right: 50px;
     cursor: pointer;
     fill: #fff;
-    z-index: 4000;
+    z-index: 100;
     /* display: inline-block; */
     width: 70px;
     height: 70px;

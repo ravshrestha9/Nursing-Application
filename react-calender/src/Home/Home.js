@@ -9,32 +9,61 @@ import Calendar from "../Calendar/Calendar";
 import AddIcon from "material-ui-icons/Add";
 // import RequestForm from "../RequestForm/RequestForm";
 import EventForm from "../EventForm/EventForm";
+import events from './events';
+
 import "./Home.css";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = { 
-        events: {},
+        events: events,
         openEventForm: false
     };
   }
 
-  handleOpenEventForm(){
-    this.setState({openEventForm: true});
-    console.log(this.state.openEventForm);
+  componentDidMount(){
+    //api call to get the list of events
+    fetch('http://35.185.78.228/calendar/events')
+    .then((resp)=>{
+      return resp.json();      
+    })
+    .then((jsonData)=>{
+      let newEvents = jsonData.map((event)=>{
+        return {
+          id: (event.EventScheduleId + 20),
+          title: event.Title || event.Course,
+          start: new Date(event.EventStart),
+          end: new Date(event.EventEnd)
+        };
+      }); 
+      this.setState({events: this.state.events.concat(newEvents)});
+      
+    })
+    .catch((err)=>{
+      console.err("Error parsing response: " + err);
+    });
+  }
+  
+  addEvent(newEvent){
+    this.setState({events: this.state.events.concat([newEvent])});
   }
 
-  handleCloseEventForm(){
+  closeEventForm(){
     this.setState({openEventForm: false});
-  } 
+  }
+
+  handleOpenEventForm(){
+    this.setState({openEventForm: true});
+  }
 
   render() {
+    console.log("Home page: " + this.state.events.length);
     return (
         <div>
-        
+
         <div id="calendar-container">
-          <Calendar schedules={this.props.schedules} />
+          <Calendar events={this.state.events} />
           <Button
             variant="fab"
             color="secondary"
@@ -44,7 +73,10 @@ class Home extends Component {
           >
             <AddIcon />
           </Button>
-         <EventForm open={this.state.openEventForm} closeForm = {this.handleCloseEventForm.bind(this)}/>
+         <EventForm open={this.state.openEventForm} 
+            addEvent={this.addEvent.bind(this)} 
+            closeEventForm={this.closeEventForm.bind(this)}
+          />
         </div>
         </div>
     );

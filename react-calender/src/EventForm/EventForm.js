@@ -36,6 +36,7 @@ class EventForm extends React.Component {
     title: "",
     course: "",
     CRN: "",
+    semester: "",
     instructor: "",
     attendees: "",
     startDate: "",
@@ -52,7 +53,23 @@ class EventForm extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      title: "",
+      course: "",
+      CRN: "",
+      semester: "",
+      instructor: "",
+      attendees: "",
+      startDate: "",
+      startTime: "",
+      endDate: "",
+      endTime: "",
+      location: "",
+      eventType: "",
+      notes: "" 
+     });
+    this.props.closeEventForm();
   };
 
   handleChange = event => {
@@ -61,11 +78,60 @@ class EventForm extends React.Component {
       });
   };
 
+  onEventSave = ()=> {
+    let events = {
+      title: this.state.title,
+      type: this.state.eventType,
+      status: "approved",
+      course: this.state.course,
+      CRN: this.state.CRN,
+      semester: this.state.semester,
+      instructor: this.state.instructor,
+      attendees: this.state.attendees,
+      location: this.state.location,
+      eventStart: this.state.startDate + " " + this.state.startTime,
+      eventEnd: this.state.endDate + " " + this.state.endTime,
+      notes: this.state.notes 
+    };
+    console.log(events);
+    // console.log(this.state.startDate + " " + this.state.startTime);
+    // console.log(new Date(this.state.startDate + " " + this.state.startTime));
+    fetch('http://35.185.78.228/calendar/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(events)
+    }).then((resp)=>{
+      return resp.json();      
+    })
+    .then((data)=>{
+       console.log(data);     
+    })
+    .catch((err)=>{
+      console.err("Error parsing response: " + err);
+    });
+
+    this.handleClose();
+    if (this.state.title && this.state.startDate && this.state.endDate){
+      this.props.addEvent({
+          id: 1000,
+          title: this.state.title, 
+          start: new Date(this.state.startDate + " " + this.state.startTime),
+          end: new Date(this.state.endDate + " " + this.state.endTime)
+        });
+    }
+    console.log("here");
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ open: newProps.open });
+  }
+
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
         <Dialog
           fullScreen
           open={this.state.open}
@@ -88,7 +154,7 @@ class EventForm extends React.Component {
               >
                 Add Event
               </Typography>
-              <Button color="inherit" onClick={this.handleClose}>
+              <Button color="inherit" onClick={this.onEventSave.bind(this)}>
                 save
               </Button>
             </Toolbar>
