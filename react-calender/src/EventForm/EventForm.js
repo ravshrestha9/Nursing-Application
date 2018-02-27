@@ -1,193 +1,215 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
-import TextField from "material-ui/TextField";
-import MenuItem from "material-ui/Menu/MenuItem";
-import Input, { InputLabel } from "material-ui/Input";
-import { FormControl, FormHelperText } from "material-ui/Form";
-import Select from "material-ui/Select";
-import Icon from "material-ui/Icon";
-//import Save from 'material-ui-icons/Save';
 import Button from "material-ui/Button";
 import Dialog from "material-ui/Dialog";
+import List, { ListItem, ListItemText } from "material-ui/List";
+import Divider from "material-ui/Divider";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import IconButton from "material-ui/IconButton";
+import Typography from "material-ui/Typography";
+import CloseIcon from "material-ui-icons/Close";
+import Slide from "material-ui/transitions/Slide";
+import TextField from "material-ui/TextField";
+import Select from "material-ui/Select";
 
-const style = {
-  width: 500
+const styles = {
+  appBar: {
+    position: "relative"
+  },
+  flex: {
+    flex: 1
+  },
+  formBody: {
+    marginLeft: 20
+  }
 };
-const padStyle = {
-  padding: "0 15px"
-};
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 class EventForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      title: "",
-      instructor: "",
-      crn: "",
-      semester: "",
-      day: "",
-      starttime: "",
-      endtime: "",
-      notes: "",
-      room: ""
-    };
-  }
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+  state = {
+    open: false,
+    title: "",
+    course: "",
+    CRN: "",
+    instructor: "",
+    attendees: "",
+    startDate: "",
+    startTime: "",
+    endDate: "",
+    endTime: "",
+    location: "",
+    eventType: "",
+    notes: ""
   };
 
-  handleClose() {
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
     this.setState({ open: false });
-    this.props.closeForm();
-  }
+  };
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ open: newProps.open });
-  }
-
-  // finishForm = event =>{
-  //   console.log(event.currentTarget.getAttribute('data-something'));
-  // }
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+      });
+  };
 
   render() {
     const { classes } = this.props;
     return (
-      <Dialog
-        title="Event Form"
-        open={this.state.open}
-        onClose={this.handleClose.bind(this)}
-        fullScreen
-        style={{
-          textAlign: "center"
-        }}
-      >
-        <form className={"dd"} noValidate>
-          <div style={padStyle}>
-            <TextField
-              id="title"
-              label="Title"
-              className={EventForm.textField}
-              value={this.state.title}
-              onChange={this.handleChange("title")}
-              margin="normal"
-            />
-          </div>
-
-          <div style={padStyle}>
-            <TextField
-              id="day"
-              label="Select Day:"
-              type="date"
-              defaultValue={this.state.name}
-              onChange={this.handleChange("day")}
-              className={"dd"}
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-            &nbsp;
-            <TextField
-              id="starttime"
-              label="Start Time:"
-              type="time"
-              defaultValue="07:30"
-              onChange={this.handleChange("starttime")}
-              className={"dd"}
-              InputLabelProps={{
-                shrink: true
-              }}
-              inputProps={{
-                step: 300 // 5 min
-              }}
-            />
-            &nbsp;
-            <TextField
-              id="endtime"
-              label="End Time:"
-              type="time"
-              defaultValue="08:30"
-              onChange={this.handleChange("endtime")}
-              className={"dd"}
-              InputLabelProps={{
-                shrink: true
-              }}
-              inputProps={{
-                step: 300 // 5 min
-              }}
-            />
-          </div>
-          <div style={padStyle}>
-            <TextField
-              id="instructor"
-              label="Instructor"
-              className={"dd"}
-              value={this.state.instructor}
-              onChange={this.handleChange("instructor")}
-              margin="normal"
-            />
-            &nbsp;
-            <TextField
-              id="course"
-              label="Course"
-              className={EventForm.textField}
-              value={this.state.crn}
-              onChange={this.handleChange("crn")}
-              margin="normal"
-            />
-            &nbsp;
-            <FormControl className={EventForm.formControl}>
-              <InputLabel htmlFor="roomnumber">Room</InputLabel>
-              <Select
-                native
-                value={this.state.room}
-                onChange={this.handleChange("room")}
-                inputProps={{
-                  id: "roomnumber"
-                }}
+      <div>
+        <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
+        <Dialog
+          fullScreen
+          open={this.state.open}
+          onClose={this.handleClose}
+          transition={Transition}
+        >
+          <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                onClick={this.handleClose}
+                aria-label="Close"
               >
-                <option value="" />
-                <option>Rm-107</option>
-                <option>Rm-218</option>
-                <option>Rm-236</option>
-                <option>Rm-242</option>
-                <option>Rm-325</option>
-                <option>Rm-340</option>
-              </Select>
-            </FormControl>
-          </div>
-          <div style={padStyle}>
+                <CloseIcon />
+              </IconButton>
+              <Typography
+                variant="title"
+                color="inherit"
+                className={classes.flex}
+              >
+                Add Event
+              </Typography>
+              <Button color="inherit" onClick={this.handleClose}>
+                save
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <br />
+          <div id="form-body" className={classes.formBody}>
             <TextField
-              id="notes"
-              label="Notes"
+              label="Title"
+              name="title"
+              value={this.state.title}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "500px" }}
+            />
+            <br /> <br />
+            <TextField
+              label="Semester"
+              name="semester"
+              value={this.state.semester}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "220px" }}
+            /> <br /> <br />
+            <TextField
+              label="Course"
+              name="course"
+              value={this.state.course}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "220px" }}
+            />
+            <TextField
+              label="CRN"
+              name="CRN"
+              value={this.state.CRN}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "220px", marginLeft: 50}}
+            />
+            <br /> <br />
+            <TextField
+              label="Instructor"
+              name="instructor"
+              value={this.state.instructor}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "220px" }}
+            /> <br /> <br/>
+            <TextField
+              label="Location"
+              name="location"
+              value={this.state.location}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "220px" }}
+            />
+            <TextField
+              label="Number of Attendees"
+              name="attendees"
+              value={this.state.attendees}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "220px", marginLeft: "50px"} }
+            /> <br/> <br /> <br/>
+            <TextField
+              name = "startDate"
+              label="Start Date"
+              type="date"
+              value={this.state.startDate}
+              onChange={this.handleChange.bind(this)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              style={{ width: "220px"}}
+            />
+            <TextField
+              name="startTime"
+              label="Start Time"
+              type="time"
+              value={this.state.startTime}
+              onChange={this.handleChange.bind(this)}
+              style={{ width:"220px",marginLeft: "50px" }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+
+            <br /> <br /> <br />
+            <TextField
+              name="endDate"
+              label="End Date"
+              type="date"
+              value={this.state.endDate}
+              onChange={this.handleChange.bind(this)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              style={{width:"220px"}}
+            />
+            <TextField
+              name="endTime"
+              label="End Time"
+              type="time"
+              value={this.state.endTime}
+              onChange={this.handleChange.bind(this)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              style={{ marginLeft:"50px", width: "220px" }}
+            /> <br /> <br />
+            <TextField
               multiline
-              style={style}
               rows="4"
-              defaultValue=""
-              onChange={this.handleChange("notes")}
-              className={EventForm.textField}
-              margin="normal"
+              label="Notes"
+              name="notes"
+              value={this.state.notes}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "500px" }}
             />
           </div>
-        </form>
-        <div style={padStyle}>
-          <Button
-            className={EventForm.button}
-            variant="raised"
-            size="small"
-            onClick={this.finishForm}
-            data-something="End form"
-          >
-            Submit
-          </Button>
-        </div>
-      </Dialog>
+        </Dialog>
+      </div>
     );
   }
 }
 
-export default EventForm;
+EventForm.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(EventForm);
