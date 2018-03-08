@@ -1,44 +1,61 @@
-import React, {Component} from 'react'
-import Home from './Home/Home';
+import React, { Component } from "react";
+import Home from "./Home/Home";
+import moment from "moment";
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      schedules: {},
-      loggedIn: false
+      loggedIn: false,
+      currentDate: new Date(2015, 3, 1),
+      currentView: "month"
     };
   }
-  
-  componentWillMount(){
-    
+
+  // handleLogin() {
+  //   this.setState({ loggedIn: true });
+  // }
+
+  handleDateNavigate(date) {
+    this.setState({ currentDate: moment(date).toDate() });
+  }
+
+  handleNextDate(){
+    if (this.state.currentView === "month"){
+      let currentMonth = this.state.currentDate.getMonth();
+      let currentYear = this.state.currentDate.getFullYear();
+      let nextDate = new Date(currentYear, currentMonth + 1);
+      this.setState({currentDate: nextDate}); 
+    }
   }
   
-  componentDidMount(){
-
-  }
-
-  handleLogin(){
-    this.setState({loggedIn: true});
+  handlePreviousDate(){
+    if (this.state.currentView === "month"){
+      let currentMonth = this.state.currentDate.getMonth();
+      let currentYear = this.state.currentDate.getFullYear();
+      let nextDate = new Date(currentYear, currentMonth -1);
+      this.setState({currentDate: nextDate}); 
+    }
   }
 
   render() {
-    // if (this.state.loggedIn){
-      return (
-        <div>
+    const props = {
+      onNavigate: (date)=>this.handleDateNavigate(date),
+      currentDate: this.state.currentDate,
+      view: this.state.currentView
+    };
+
+    return (
+      <div>
         <div className="App">
-            <Home/>
+          <Home {...props}/>
         </div>
+        <div>
+          <button onClick={this.handlePreviousDate.bind(this)}>Previous</button>
+          <button onClick={this.handleNextDate.bind(this)}>Next</button>
         </div>
-      );
-    // } else {
-    //   return (
-    //     <div> 
-    //       You must log in.
-    //       <button type="button" onClick={this.handleLogin.bind(this)}>Log In</button>
-    //     </div>
-    //   );
-    // }
+      </div>
+    );
   }
 }
 

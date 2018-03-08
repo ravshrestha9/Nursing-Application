@@ -35,10 +35,12 @@ class Calendar extends Component {
           //   this.setState({ selectedDay: date });
           // }}
           views={allViews}
+          view = {this.props.currentView}
           step={60}
           showMultiDayTimes
-          defaultDate={new Date(2015, 3, 1)}
-          onNavigate ={(date) => {this.setState({ selectedDate: date})}}
+          date={this.props.currentDate}
+          onNavigate ={this.props.onNavigate}
+          onView = {(view) => console.log(view)}
           onSelectEvent ={(event) => console.log("event:" + event)}
           style={{ height: "100vh"}}
           components = {{

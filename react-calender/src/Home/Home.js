@@ -63,7 +63,7 @@ class Home extends Component {
         <div>
 
         <div id="calendar-container">
-          <Calendar events={this.state.events} />
+          <Calendar events={this.state.events} {...this.props} />
           <Button
             variant="fab"
             color="secondary"
