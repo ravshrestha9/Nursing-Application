@@ -8,7 +8,7 @@ export default [
     },
     {
       id: 1,
-      title: 'Long Event',
+      title: 'Long Event ',
       start: new Date(2015, 3, 7),
       end: new Date(2015, 3, 10),
     },
