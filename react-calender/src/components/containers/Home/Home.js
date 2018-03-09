@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
-import IconButton from "material-ui/IconButton";
-import MenuIcon from "material-ui-icons/Menu";
-import Calendar from "../Calendar/Calendar";
+import Calendar from "../../../components/Calendar/Calendar";
 import AddIcon from "material-ui-icons/Add";
 // import RequestForm from "../RequestForm/RequestForm";
-import EventForm from "../EventForm/EventForm";
+import EventForm from "../Forms/EventForm/EventForm";
 import events from './events';
 
 import "./Home.css";
@@ -41,7 +36,7 @@ class Home extends Component {
       
     })
     .catch((err)=>{
-      console.err("Error parsing response: " + err);
+      console.log("Error parsing response: " + err);
     });
   }
   

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Home from "./Home/Home";
+import Home from "../src/components/containers/Home/Home";
 import moment from "moment";
 
 class App extends Component {
@@ -28,7 +28,7 @@ class App extends Component {
       this.setState({currentDate: nextDate}); 
     }
   }
-  
+
   handlePreviousDate(){
     if (this.state.currentView === "month"){
       let currentMonth = this.state.currentDate.getMonth();

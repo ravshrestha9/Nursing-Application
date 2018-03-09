@@ -7,15 +7,13 @@ import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 import MenuIcon from "material-ui-icons/Menu";
-import Calendar from "../Calendar/Calendar";
-import AddIcon from "material-ui-icons/Add";
+// import Calendar from "../../Calendar/Calendar";
+
 import KeyboardArrowLeftIcon from "material-ui-icons/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "material-ui-icons/KeyboardArrowRight";
-import Input, { InputLabel } from 'material-ui/Input';
 import Select from 'material-ui/Select';
-import { FormControl, FormHelperText } from 'material-ui/Form';
 
-import Drawers from "./Drawers";
+import Drawers from "../Sidebar/Drawers";
 import {MenuItem} from "material-ui/Menu";
 import "./MenuBar.css";
 
@@ -29,23 +27,23 @@ import "./MenuBar.css";
 
 const MenuBar = toolbar => {
   const goToBack = () => {
-    if (toolbar.view == "day") {
+    if (toolbar.view === "day") {
       toolbar.date.setDate(toolbar.date.getDate() - 1);
       toolbar.onNavigate("next");
-    } else if (toolbar.view == "week") {
+    } else if (toolbar.view === "week") {
       toolbar.date.setDate(toolbar.date.getDate() - 7);
       toolbar.onNavigate("next");
-    } else if (toolbar.view == "month") {
+    } else if (toolbar.view === "month") {
       toolbar.date.setMonth(toolbar.date.getMonth() - 1);
       toolbar.onNavigate("prev");
     }
   };
 
 const goToNext = () => {
-    if (toolbar.view == "day") {
+    if (toolbar.view === "day") {
       toolbar.date.setDate(toolbar.date.getDate() + 1);
       toolbar.onNavigate("next");
-    } else if (toolbar.view == "week") {
+    } else if (toolbar.view === "week") {
       toolbar.date.setDate(toolbar.date.getDate() + 7);
       toolbar.onNavigate("next");
     } else if (toolbar.view == "month") {
@@ -85,6 +83,7 @@ return (
                 aria-label="open drawer"
               >                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
             <MenuIcon />
+            <Drawers/>
           </IconButton>
           <Typography variant="title" color="inherit" className="flex">
             Nursing Course Calendar

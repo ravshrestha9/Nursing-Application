@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 import Dialog from "material-ui/Dialog";
-import List, { ListItem, ListItemText } from "material-ui/List";
-import Divider from "material-ui/Divider";
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
@@ -12,7 +10,6 @@ import Typography from "material-ui/Typography";
 import CloseIcon from "material-ui-icons/Close";
 import Slide from "material-ui/transitions/Slide";
 import TextField from "material-ui/TextField";
-import Select from "material-ui/Select";
 
 const styles = {
   appBar: {
@@ -109,7 +106,7 @@ class EventForm extends React.Component {
        console.log(data);     
     })
     .catch((err)=>{
-      console.err("Error parsing response: " + err);
+      console.log("Error parsing response: " + err);
     });
 
     this.handleClose();
