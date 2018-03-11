@@ -46,7 +46,7 @@ const goToNext = () => {
     } else if (toolbar.view === "week") {
       toolbar.date.setDate(toolbar.date.getDate() + 7);
       toolbar.onNavigate("next");
-    } else if (toolbar.view == "month") {
+    } else if (toolbar.view === "month") {
       toolbar.date.setMonth(toolbar.date.getMonth() + 1);
       toolbar.onNavigate("next");
     }

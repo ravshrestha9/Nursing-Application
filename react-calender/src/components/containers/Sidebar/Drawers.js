@@ -6,6 +6,7 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import List from 'material-ui/List';
+import { MenuItem } from 'material-ui/Menu';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
@@ -13,6 +14,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+
 
 const drawerWidth = 240;
 
@@ -45,7 +47,9 @@ const styles = theme => ({
   'appBarShift-left': {
     marginLeft: drawerWidth,
   },
-  
+  'appBarShift-right': {
+    marginRight: drawerWidth,
+  },
   menuButton: {
     marginLeft: 12,
     marginRight: 20,
@@ -76,7 +80,9 @@ const styles = theme => ({
   'content-left': {
     marginLeft: -drawerWidth,
   },
-  
+  'content-right': {
+    marginRight: -drawerWidth,
+  },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -86,7 +92,9 @@ const styles = theme => ({
   'contentShift-left': {
     marginLeft: 0,
   },
-  
+  'contentShift-right': {
+    marginRight: 0,
+  },
 });
 
 class PersistentDrawer extends React.Component {
@@ -153,6 +161,8 @@ class PersistentDrawer extends React.Component {
           onChange={this.handleChangeAnchor}
           margin="normal"
         >
+          <MenuItem value="left">left</MenuItem>
+          <MenuItem value="right">right</MenuItem>
         </TextField>
         <div className={classes.appFrame}>
           <AppBar
@@ -183,7 +193,7 @@ class PersistentDrawer extends React.Component {
             })}
           >
             <div className={classes.drawerHeader} />
-            <Typography>{'You think water moves fast? You should see ice.'}</Typography>
+            <Typography>{'Side Nav is not working.'}</Typography>
           </main>
           {after}
         </div>
