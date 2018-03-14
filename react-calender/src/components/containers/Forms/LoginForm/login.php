@@ -23,8 +23,8 @@ function CloseCon($conn)
 
 //echo "Connected Successfully"."<br />";
 
-$loginuser = "siwakop"; // the value is going to come from the login page
-$loginpassword = "siwakop123"; //the value is going to come from the login page
+$loginuser = "peveto"; // the value is going to come from the login page
+$loginpassword = "peveto123"; //the value is going to come from the login page
 
 $querylogin = "SELECT cwid, username, password FROM user WHERE username = '$loginuser' AND password = '$loginpassword'";
 
@@ -50,6 +50,8 @@ if ($result->num_rows > 0) {
    $addnotes = "null";
    $modifyevent = "null";
    $viewevent = "null";
+   $adduser = "null";
+   $changeroles = "null";
 
    while($row = $resultpermissions->fetch_assoc()) {
        //echo "cwid: ".$row["cwid"]. " - username: " . $row["username"]. " -password: " . $row["password"]. "<br />";
@@ -67,6 +69,10 @@ if ($result->num_rows > 0) {
         //echo $modifyevent."<br />";
        $viewevent = $row["viewevent"];
       //  echo $viewevent."<br />";
+      $adduser = $row["adduser"];
+      //echo $adduser."<br />";
+      $changerole = $row["changerole"];
+      //echo $changerole."<br />";
        //echo "You have sucessfully accessed permissions"."<br />";
    }
    $course = array();
@@ -105,6 +111,8 @@ echo $modifyevent."<br />";
 echo $addnotes."<br />";
 echo $viewevent."<br />";
 echo $addnotes."<br />";
+echo $adduser."<br />";
+echo $changerole."<br />";
 echo "<pre>";
 print_r($course);
 echo "<pre />";
