@@ -23,8 +23,8 @@ function CloseCon($conn)
 
 //echo "Connected Successfully"."<br />";
 
-$loginuser = "ogg"; // the value is going to come from the login page
-$loginpassword = "ogg123"; //the value is going to come from the login page
+$loginuser = "siwakop"; // the value is going to come from the login page
+$loginpassword = "siwakop123"; //the value is going to come from the login page
 
 $querylogin = "SELECT cwid, username, password FROM user WHERE username = '$loginuser' AND password = '$loginpassword'";
 
@@ -77,16 +77,14 @@ if ($result->num_rows > 0) {
         array_push($course, $row["prefixnumber"]);
       }
    }
-  $course = array();
-  if ($role == "instructor") {
+  else if ($role == "instructor") {
       $queryinstructor = "SELECT DISTINCT prefixnumber FROM course WHERE cwid = '$cwid'";
       $resultinstructor = $conn->query($queryinstructor);
       while($row = $resultinstructor->fetch_assoc()) {
        array_push($course, $row["prefixnumber"]);
       }
    }
-   $course = array();
-   if ($role == "admin") {
+   else {
       $queryadmin = "SELECT DISTINCT prefixnumber FROM course";
       $resultadmin = $conn->query($queryadmin);
       while($row = $resultadmin->fetch_assoc()) {
@@ -117,4 +115,3 @@ echo "<pre />";
 CloseCon($conn);
 
 ?>
-s
