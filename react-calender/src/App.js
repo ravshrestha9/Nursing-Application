@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Home from "../src/components/containers/Home/Home";
 import moment from "moment";
+import LoginForm from "../src/components/containers/Forms/LoginForm/LoginForm";
 
 class App extends Component {
   constructor() {
@@ -48,11 +49,7 @@ class App extends Component {
     return (
       <div>
         <div className="App">
-          <Home {...props}/>
-        </div>
-        <div>
-          <button onClick={this.handlePreviousDate.bind(this)}>Previous</button>
-          <button onClick={this.handleNextDate.bind(this)}>Next</button>
+          <LoginForm {...props}/>
         </div>
       </div>
     );

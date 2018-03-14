@@ -1,0 +1,24 @@
+#logPage{
+    border: solid rgb(110, 9, 9);
+    margin: auto;
+    width: 225px;
+    border-width: 5px;
+    padding: 10px;
+    height: 220px;
+    background-color: white;
+}
+#nurse{
+    text-align: center;
+}
+#buttonCol{
+    background-color: rgb(110, 9, 9);
+    color: white;
+    margin: auto;
+}
+#logo{
+    height: 100px;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
