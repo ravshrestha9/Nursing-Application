@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Button from "material-ui/Button";
-import Calendar from "../../../components/Calendar/Calendar";
+import Calendar from "./Calendar";
 import AddIcon from "material-ui-icons/Add";
 // import RequestForm from "../RequestForm/RequestForm";
-import EventForm from "../Forms/EventForm/EventForm";
+import EventForm from "./EventForm/EventForm";
 import events from './events';
 
 import "./Home.css";
@@ -16,7 +16,7 @@ class Home extends Component {
         openEventForm: false
     };
   }
-
+ 
   componentDidMount(){
     //api call to get the list of events
     fetch('http://35.185.78.228/calendar/events')

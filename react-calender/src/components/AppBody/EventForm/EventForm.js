@@ -124,7 +124,7 @@ class EventForm extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setState({ open: newProps.open });
   }
-
+ 
   render() {
     const { classes } = this.props;
     return (

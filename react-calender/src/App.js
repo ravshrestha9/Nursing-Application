@@ -1,26 +1,35 @@
 import React, { Component } from "react";
-import Home from "../src/components/containers/Home/Home";
-import moment from "moment";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import MenuBar from './components/MenuBar/MenuBar';
+import SideNav from './components/SideNav/SideNav';
+import AppBody from './components/AppBody/AppBody';
+import moment from 'moment';
+
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: this.props.loggedIn,
       currentDate: new Date(2015, 3, 1),
-      currentView: "month"
+      currentView: "month",
+      sideNavOpen: false,
     };
   }
 
   // handleLogin() {
   //   this.setState({ loggedIn: true });
   // }
+  handleSideNavDisplay = () => {
+    let isOpen = this.state.sideNavOpen;
+    this.setState({ sideNavOpen: !isOpen });
+  };
 
-  handleDateNavigate(date) {
+  handleDateNavigate = (date) => {
     this.setState({ currentDate: moment(date).toDate() });
   }
 
-  handleNextDate(){
+  handleNextDate = () => {
     if (this.state.currentView === "month"){
       let currentMonth = this.state.currentDate.getMonth();
       let currentYear = this.state.currentDate.getFullYear();
@@ -29,7 +38,7 @@ class App extends Component {
     }
   }
 
-  handlePreviousDate(){
+  handlePreviousDate = () => {
     if (this.state.currentView === "month"){
       let currentMonth = this.state.currentDate.getMonth();
       let currentYear = this.state.currentDate.getFullYear();
@@ -37,24 +46,53 @@ class App extends Component {
       this.setState({currentDate: nextDate}); 
     }
   }
+  
+  handleCurrentDate = ()=>{
+    this.setState({ currentDate: new Date()});
+  }
+
+  handleViewChange = (event) => {
+    this.setState({ currentView: event.target.value});
+  }
 
   render() {
-    const props = {
+    const bodyProps = {
       onNavigate: (date)=>this.handleDateNavigate(date),
       currentDate: this.state.currentDate,
-      view: this.state.currentView
+      currentView: this.state.currentView,
+      sideNavOpen: this.state.sideNavOpen
+    };
+    
+    const menuProps = {
+      onSideNavDisplay:this.handleSideNavDisplay,
+      onNextDate: this.handleNextDate,
+      onPreviousDate: this.handlePreviousDate,
+      onNavigateToday: this.handleCurrentDate,
+      currentDate: this.state.currentDate,
+      currentView: this.state.currentView,
+      onViewChange: this.handleViewChange,
+      loggedIn:this.props.loggedIn
     };
 
+    if (!this.props.loggedIn){
+      return null;
+    }
+
     return (
+      <MuiThemeProvider>
       <div>
-        <div className="App">
-          <Home {...props}/>
-        </div>
-        <div>
+          <MenuBar {...menuProps}/>
+          <SideNav open = {this.state.sideNavOpen} />
+          <AppBody 
+            {...bodyProps}
+          />
+
+        {/* <div>
           <button onClick={this.handlePreviousDate.bind(this)}>Previous</button>
           <button onClick={this.handleNextDate.bind(this)}>Next</button>
-        </div>
+        </div> */}
       </div>
+      </MuiThemeProvider>
     );
   }
 }
