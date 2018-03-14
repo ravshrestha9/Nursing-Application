@@ -23,8 +23,8 @@ function CloseCon($conn)
 
 //echo "Connected Successfully"."<br />";
 
-$loginuser = "peveto"; // the value is going to come from the login page
-$loginpassword = "peveto123"; //the value is going to come from the login page
+$loginuser = "ogg"; // the value is going to come from the login page
+$loginpassword = "ogg123"; //the value is going to come from the login page
 
 $querylogin = "SELECT cwid, username, password FROM user WHERE username = '$loginuser' AND password = '$loginpassword'";
 
@@ -70,7 +70,7 @@ if ($result->num_rows > 0) {
        //echo "You have sucessfully accessed permissions"."<br />";
    }
    $course = array();
-   if($role = "student"){
+   if($role == "student"){
       $querystudent = "SELECT DISTINCT prefixnumber FROM course JOIN takes ON course.crn = takes.crn WHERE takes.cwid = '$cwid'";
       $resultstudent = $conn->query($querystudent);
       while($row = $resultstudent->fetch_assoc()) {
@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
       }
    }
   $course = array();
-  if ($role = "instructor") {
+  if ($role == "instructor") {
       $queryinstructor = "SELECT DISTINCT prefixnumber FROM course WHERE cwid = '$cwid'";
       $resultinstructor = $conn->query($queryinstructor);
       while($row = $resultinstructor->fetch_assoc()) {
@@ -86,7 +86,7 @@ if ($result->num_rows > 0) {
       }
    }
    $course = array();
-   if ($role = "admin") {
+   if ($role == "admin") {
       $queryadmin = "SELECT DISTINCT prefixnumber FROM course";
       $resultadmin = $conn->query($queryadmin);
       while($row = $resultadmin->fetch_assoc()) {
@@ -117,3 +117,4 @@ echo "<pre />";
 CloseCon($conn);
 
 ?>
+s
