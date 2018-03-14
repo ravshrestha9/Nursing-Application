@@ -5,7 +5,7 @@ import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import "./LoginForm.css";
-import "./ulmlogo.png";
+import axios from "axios";
 
 const styles = theme => ({
     container: {
@@ -48,11 +48,11 @@ class LoginForm extends React.Component {
                 <img id="logo" src={require("./ulmlogo.png")}/>
                 <h1 id="nurse">Nursing Calendar</h1>
                 <br />
-            <form id="logPage" >
+            <form id="logPage" action="http://localhost/login.php" method="POST">
                 <TextField
                 label="Username"
                 name="username"
-                value={this.state.title}
+                value={this.state.username}
                 onChange={this.handleChange.bind(this)}
                 />
                 <br /> <br />
@@ -60,11 +60,11 @@ class LoginForm extends React.Component {
                 label="Password"
                 name="password"
                 type="password"
-                value={this.state.title}
+                value={this.state.password}
                 onChange={this.handleChange.bind(this)}
                 />
                 <br /><br /><br /><br />
-                <Button variant="raised" id="buttonCol" type="submit" onClick={this.onLoginSave.bind(this)}>
+                <Button variant="raised" id="buttonCol" type="submit">
                     Login
                 </Button>
             </form>
