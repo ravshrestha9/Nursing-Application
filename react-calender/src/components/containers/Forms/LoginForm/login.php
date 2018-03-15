@@ -106,27 +106,31 @@ if ($result->num_rows > 0) {
       //echo $changerole."<br />";
        //echo "You have sucessfully accessed permissions"."<br />";
    }
+   
    $course = array();
+
+   function fillcourse($aquery, $conn){
+     $result = $conn->query($aquery);
+     $acourse = array();
+     while($row = $result->fetch_assoc()) {
+       array_push($acourse, $row["prefixnumber"]);
+     }
+     return $acourse;
+   }
+
+
    if($role == "student"){
-      $querystudent = "SELECT DISTINCT prefixnumber FROM course JOIN takes ON course.crn = takes.crn WHERE takes.cwid = '$cwid'";
-      $resultstudent = $conn->query($querystudent);
-      while($row = $resultstudent->fetch_assoc()) {
-        array_push($course, $row["prefixnumber"]);
-      }
+      $query = "SELECT DISTINCT prefixnumber FROM course JOIN takes ON course.crn = takes.crn WHERE takes.cwid = '$cwid'";
+      $course = fillcourse($query, $conn);
    }
   else if ($role == "instructor") {
-      $queryinstructor = "SELECT DISTINCT prefixnumber FROM course WHERE cwid = '$cwid'";
-      $resultinstructor = $conn->query($queryinstructor);
-      while($row = $resultinstructor->fetch_assoc()) {
-       array_push($course, $row["prefixnumber"]);
-      }
+      $query = "SELECT DISTINCT prefixnumber FROM course WHERE cwid = '$cwid'";
+      $course = fillcourse($query, $conn);
    }
    else {
-      $queryadmin = "SELECT DISTINCT prefixnumber FROM course";
-      $resultadmin = $conn->query($queryadmin);
-      while($row = $resultadmin->fetch_assoc()) {
-        array_push($course, $row["prefixnumber"]);
-      }
+      $query = "SELECT DISTINCT prefixnumber FROM course";
+      $course = fillcourse($query, $conn);
+
    }
 
 // Note: the data can be taken from the variables $cwid, $username, $password, $role, $createevent, $deleteevent, $modifyevent, $addnotes, $viewevent, and $course and sent using a jon object
