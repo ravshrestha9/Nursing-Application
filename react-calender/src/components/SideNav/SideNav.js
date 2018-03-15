@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles';
 
 import List from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
-import Divider from 'material-ui/Divider';
+// import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
 
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
@@ -20,17 +20,23 @@ class SideNav extends Component {
 
   render() {
     const { classes, theme } = this.props;
-    let navList = ['Users', 'Room', 'Requests', 'Logs','Export', 'Print', 'Archive'];
-    let role = 'student';
+    const {role} = this.props.loginInfo;
+    let navList = [' Create Users', ' Create Room', 'Handle Requests', 'Request Rooms', 'View Logs','Export', 'Print', 'Archive', 'Set Deadlines', 'Block Rooms','Add Notes'];
+    
     let authNavs = []
-
-    if (role == 'student'){
-      authNavs = navList.filter((nav) => nav == 'Print' || nav == 'Export');
+    if (role === 'student'){
+      authNavs = navList.filter((nav) => nav === 'Print' || nav === 'Export');
     }
-    else {
+    else if (role === 'instructor') {
+      authNavs = navList.filter((nav) => nav === 'Print' || nav === 'Export' || nav === 'Request Rooms');
+    }
+    else if (role === 'crnInstructor') {
+      authNavs = navList.filter((nav) => nav === 'Print' || nav === 'Export' || nav === 'Add Notes');
+    }
+    else{
       authNavs = navList;
     }
-
+    
     return (
       
          <Drawer

@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: this.props.loggedIn,
-      currentDate: new Date(2015, 3, 1),
+      currentDate: new Date(),
       currentView: "month",
       sideNavOpen: false,
     };
@@ -60,7 +60,8 @@ class App extends Component {
       onNavigate: (date)=>this.handleDateNavigate(date),
       currentDate: this.state.currentDate,
       currentView: this.state.currentView,
-      sideNavOpen: this.state.sideNavOpen
+      sideNavOpen: this.state.sideNavOpen,
+      loginInfo: this.props
     };
     
     const menuProps = {
@@ -74,6 +75,11 @@ class App extends Component {
       loggedIn:this.props.loggedIn
     };
 
+    const navProps = {
+      open: this.state.sideNavOpen,
+      loginInfo: this.props
+    };
+
     if (!this.props.loggedIn){
       return null;
     }
@@ -82,7 +88,7 @@ class App extends Component {
       <MuiThemeProvider>
       <div>
           <MenuBar {...menuProps}/>
-          <SideNav open = {this.state.sideNavOpen} />
+          <SideNav {...navProps} />
           <AppBody 
             {...bodyProps}
           />

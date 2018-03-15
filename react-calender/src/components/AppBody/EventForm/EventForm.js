@@ -115,7 +115,7 @@ class EventForm extends React.Component {
           id: 1000,
           title: this.state.title, 
           start: new Date(this.state.startDate + " " + this.state.startTime),
-          end: new Date(this.state.endDate + " " + this.state.endTime)
+          end: new Date(this.state.endDate + " " + this.state.endTime),
         });
     }
     console.log("here");

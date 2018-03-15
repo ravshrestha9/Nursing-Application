@@ -5,31 +5,41 @@ import AddIcon from "material-ui-icons/Add";
 // import RequestForm from "../RequestForm/RequestForm";
 import EventForm from "./EventForm/EventForm";
 import events from './events';
-
+import axios from 'axios';
 import "./Home.css";
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { 
         events: events,
-        openEventForm: false
+        openEventForm: false,
+        role: 'admin'
     };
   }
  
   componentDidMount(){
     //api call to get the list of events
-    fetch('http://35.185.78.228/calendar/events')
-    .then((resp)=>{
-      return resp.json();      
+    const {cwid, role} = {...this.props.loginInfo};
+    let requestURL = 'http://35.185.78.228/calendar/events';
+
+    if (role !== 'admin') {
+      requestURL = `http://35.185.78.228/calendar/events?cwid=${cwid}&role=${role}`;
+    }
+    axios({
+      method: 'get',
+      url: requestURL
     })
-    .then((jsonData)=>{
-      let newEvents = jsonData.map((event)=>{
+    .then((response)=>{
+      let data = response.data;
+      let newEvents = data.map((event)=>{
         return {
           id: (event.EventScheduleId + 20),
-          title: event.Title || event.Course,
+          title: event.Course + ' ' + 'Room: ' + event.location,
           start: new Date(event.EventStart),
-          end: new Date(event.EventEnd)
+          end: new Date(event.EventEnd),
+          desc: event.Notes,
+          location: event.Location
         };
       }); 
       this.setState({events: this.state.events.concat(newEvents)});
@@ -53,13 +63,9 @@ class Home extends Component {
   }
 
   render() {
-    console.log("Home page: " + this.state.events.length);
-    return (
+    let button = (
         <div>
-
-        <div id="calendar-container">
-          <Calendar events={this.state.events} {...this.props} />
-          <Button
+        <Button
             variant="fab"
             color="secondary"
             aria-label="add"
@@ -72,7 +78,14 @@ class Home extends Component {
             addEvent={this.addEvent.bind(this)} 
             closeEventForm={this.closeEventForm.bind(this)}
           />
-        </div>
+          </div>
+    )
+
+    if (this.props.loginInfo.role === 'student' || this.props.loginInfo.role === "crnInstructor") button = null;
+    return (
+        <div id="calendar-container">
+          <Calendar events={this.state.events} {...this.props} />
+          {button}
         </div>
     );
   }
