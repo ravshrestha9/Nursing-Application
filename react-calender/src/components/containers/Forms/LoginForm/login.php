@@ -106,8 +106,8 @@ if ($result->num_rows > 0) {
       //echo $changerole."<br />";
        //echo "You have sucessfully accessed permissions"."<br />";
    }
-   
-   $course = array();
+
+   //$course = array();
 
    function fillcourse($aquery, $conn){
      $result = $conn->query($aquery);
@@ -118,20 +118,19 @@ if ($result->num_rows > 0) {
      return $acourse;
    }
 
+   $query = "null";
 
    if($role == "student"){
       $query = "SELECT DISTINCT prefixnumber FROM course JOIN takes ON course.crn = takes.crn WHERE takes.cwid = '$cwid'";
-      $course = fillcourse($query, $conn);
    }
   else if ($role == "instructor") {
       $query = "SELECT DISTINCT prefixnumber FROM course WHERE cwid = '$cwid'";
-      $course = fillcourse($query, $conn);
    }
    else {
       $query = "SELECT DISTINCT prefixnumber FROM course";
-      $course = fillcourse($query, $conn);
-
    }
+
+   $course = fillcourse($query, $conn);
 
 // Note: the data can be taken from the variables $cwid, $username, $password, $role, $createevent, $deleteevent, $modifyevent, $addnotes, $viewevent, and $course and sent using a jon object
 //the outof each variable is below for a user
