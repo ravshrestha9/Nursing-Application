@@ -34,6 +34,7 @@ class Login extends Component {
       })
       .then(response => {
         if (response.status == 200) {
+          console.log(response);
           const {UserName, Password, Role, CWID} = {...response.data[0]};
           this.setState({
             username: UserName,

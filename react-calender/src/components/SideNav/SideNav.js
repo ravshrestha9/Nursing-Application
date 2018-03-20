@@ -28,7 +28,7 @@ class SideNav extends Component {
       authNavs = navList.filter((nav) => nav === 'Print' || nav === 'Export');
     }
     else if (role === 'instructor') {
-      authNavs = navList.filter((nav) => nav === 'Print' || nav === 'Export' || nav === 'Request Rooms');
+      authNavs = navList.filter((nav) => nav === 'Print' || nav === 'Export' || nav === 'Request Rooms' || nav === 'Add Notes');
     }
     else if (role === 'crnInstructor') {
       authNavs = navList.filter((nav) => nav === 'Print' || nav === 'Export' || nav === 'Add Notes');
