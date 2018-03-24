@@ -6,7 +6,7 @@ const styles = theme => ({
     flexGrow: 1,
   },
   appFrame: {
-    height: '100%',
+    height: '80%',
     zIndex: 1,
     overflow: 'hidden',
     position: 'absolute',
@@ -24,8 +24,9 @@ const styles = theme => ({
   drawerPaper: {
     position: 'absolute',
     width: drawerWidth,
-    backgroundColor: '#f2f1ef',
-    boxShadow: '7px 0px 22px -9px rgba(0,0,0,0.75)'
+     backgroundColor: '#f7f7f1',
+    boxShadow: '7px 0px 22px -9px rgba(0,0,0,0.75)',
+    alignItems:'center'
   },
   drawerHeader: {
     display: 'flex',
@@ -34,6 +35,7 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+  
   
 
 });

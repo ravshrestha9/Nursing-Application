@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
-
 import Home from './Home';
 import styles from './AppBodyStyle';
 

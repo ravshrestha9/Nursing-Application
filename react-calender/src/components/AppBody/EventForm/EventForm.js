@@ -152,7 +152,7 @@ class EventForm extends React.Component {
                 Add Event
               </Typography>
               <Button color="inherit" onClick={this.onEventSave.bind(this)}>
-                save
+                Save
               </Button>
             </Toolbar>
           </AppBar>

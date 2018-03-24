@@ -37,3 +37,10 @@
 #back:hover, #next:hover{
     background: rgb(112, 157, 216);
 }
+
+ 
+@media only screen and (max-width: 400px) {
+    .root {
+    background-color: indigo;
+    }
+    }

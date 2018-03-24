@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import MenuBar from './components/MenuBar/MenuBar';
 import SideNav from './components/SideNav/SideNav';
 import AppBody from './components/AppBody/AppBody';
 import moment from 'moment';
+import PrintThisComponent from '../src/components/Functionality/print';
+
 
 
 class App extends Component {
@@ -92,7 +94,8 @@ class App extends Component {
           <AppBody 
             {...bodyProps}
           />
-
+          
+        <PrintThisComponent/>
         {/* <div>
           <button onClick={this.handlePreviousDate.bind(this)}>Previous</button>
           <button onClick={this.handleNextDate.bind(this)}>Next</button>

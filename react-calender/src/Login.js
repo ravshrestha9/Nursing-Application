@@ -1,13 +1,22 @@
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
 import React, { Component } from "react";
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+// import SimpleAppBar from './components/LoginBar/loginbar';
 import Paper from "material-ui/Paper";
-// import logo from "./ulm_logo1.png";
 import axios from "axios";
-
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import './loginform.css';
 import App from "./App";
 
-const credentials = { username: "super", password: "super" };
+const mytheme = createMuiTheme({
+  palette: {
+    primary: { main: "#720d0d" },
+    secondary: { main: "#a74034" },
+  },
+});
 
 class Login extends Component {
   constructor(props) {
@@ -33,9 +42,9 @@ class Login extends Component {
         password: this.state.password
       })
       .then(response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           console.log(response);
-          const {UserName, Password, Role, CWID} = {...response.data[0]};
+          const { UserName, Password, Role, CWID } = { ...response.data[0] };
           this.setState({
             username: UserName,
             password: Password,
@@ -51,76 +60,48 @@ class Login extends Component {
   };
 
   render() {
-    let loginForm = (
-      <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#ECEEF0"
-        }}
-      >
+    let loginBar = (
+      <div >
+        <AppBar className="app-bar" position="static">
+          <Toolbar className="toolbar">
+            <img className="img" src="https://preview.ibb.co/ihqRLH/ulmLogo.png" alt="logo"></img>
+            <Typography variant="title" color="inherit" style={{ fontSize: "calc(16px+10vw)" }}>
+              The University of Louisiana at Monroe
+                    </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
+    )
+
+    let LoginForm = (
+
+      <div className="form-group">
+
         <Paper
           style={{
-            innerWidth: "100px",
-
-            paddingBottom: 16,
+            paddingtop: 16,
+            textAlign: 'center',
+            display: "center",
+            innerWidth: '200px',
             width: "500px",
             height: "400px"
           }}
         >
-          <div
-            className="header"
-            style={{
-              height: "80px",
-              width: "100%",
-              backgroundColor: "#223382",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            {/* <div className="logo" style={{flex: '1', border: '1px solid black'}} >
-                <img src={logo} style={{height:'80px', width:'250px', clip: 'rect(20px,20px,20px,20px)'}} />
-              </div> */}
-            <div style={{}}>
-              <span
-                style={{
-                  color: "#F4D2DC",
-                  fontSize: "20px",
-                  fontWeight: "100"
-                }}
-              >
-                {" "}
-                <span
-                  style={{
-                    fontWeight: "bold",
-                    color: "#BD707F",
-                    fontSize: "30px"
-                  }}
-                >
-                  ULM
-                </span>{" "}
-                Nursing Calendar{" "}
-              </span>{" "}
-            </div>
+          <div className="header">
+            <span className="span">
+              <span className="innerSpan" >ULM</span>
+              Nursing Calendar
+            </span>
           </div>
-          <div
-            className="content"
-            style={{
-              textAlign: "center"
-            }}
-          >
-            <br />
-            <br />
+
+          <div className="form-contents" style={{ paddingtop: 100 }}>
             <TextField
               label="Username"
               name="username"
               value={this.state.username}
               onChange={this.handleChange}
             />
-            <br /> <br />
+            <br /><br />
             <TextField
               label="Password"
               name="password"
@@ -128,22 +109,16 @@ class Login extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-            <br /> <br /> <br /> <br />
-            <Button
-              variant="raised"
-              size="large"
-              color="primary"
-              onClick={this.handleLogin}
-            >
-              Submit
-            </Button>
-            <br /> <br />
-          </div>
+          </div> <br /><br />
+          <Button variant="raised" color="primary" onClick={this.handleLogin}>
+            Login
+              </Button>
         </Paper>
       </div>
-    );
+    )
 
-    if (this.state.loggedIn) loginForm = null;
+    if (this.state.loggedIn) { LoginForm = null };
+    if (this.state.loggedIn) { loginBar = null };
 
     const props = {
       loggedIn: this.state.loggedIn,
@@ -152,8 +127,13 @@ class Login extends Component {
     };
     return (
       <div>
-        {loginForm}
-        <App {...props} />
+        <MuiThemeProvider theme={mytheme}>
+          <div>
+            {loginBar}
+            {LoginForm}
+            <App {...props} />
+          </div>
+        </MuiThemeProvider>
       </div>
     );
   }
