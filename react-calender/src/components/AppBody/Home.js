@@ -35,7 +35,7 @@ class Home extends Component {
       let newEvents = data.map((event)=>{
         return {
           id: (event.EventScheduleId + 20),
-          title: event.Course + ' ' + 'Room: ' + event.location,
+          title: event.Course + ' ' + 'Room: ' + event.Location,
           start: new Date(event.EventStart),
           end: new Date(event.EventEnd),
           desc: event.Notes,

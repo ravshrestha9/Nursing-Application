@@ -21,7 +21,8 @@ class SideNav extends Component {
   render() {
     const { classes, theme } = this.props;
     const {role} = this.props.loginInfo;
-    let navList = [' Create Users', ' Create Room', 'Handle Requests', 'Request Rooms', 'View Logs','Export', 'Print', 'Archive', 'Set Deadlines', 'Block Rooms','Add Notes'];
+    let navList = [' Create Users', ' Create Room', 'Handle Requests', 'Request Rooms', 
+            'View Logs','Export', 'Print', 'Archive', 'Set Deadlines', 'Block Rooms','Assign Lead Instructor'];
     
     let authNavs = []
     if (role === 'student'){
