@@ -83,7 +83,7 @@ class Home extends Component {
 
     if (this.props.loginInfo.role === 'student' || this.props.loginInfo.role === "crnInstructor") button = null;
     return (
-        <div id="calendar-container">
+        <div id="calendar-container" className={`calendar-${this.props.currentView}`}>
           <Calendar events={this.state.events} {...this.props} />
           {button}
         </div>

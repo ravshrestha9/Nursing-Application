@@ -1,0 +1,29 @@
+@media print {
+
+    button {
+        display: none !important;
+    }
+    
+   .calendar-week .rbc-calendar {
+        height: auto !important;
+    }
+
+    .calendar-month .rbc-calendar {
+        height: 727px !important;
+        display: table !important;
+
+    }
+
+    .calendar-month .rbc-month-row {
+        display: table !important;
+        height: 100px !important;
+        width: 100% !important;
+    }
+
+    .calendar-month .rbc-month-view {
+        display: table !important;
+        height: 100px !important;
+        width: 100% !important;
+    }
+
+}

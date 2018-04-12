@@ -5,6 +5,9 @@ import SideNav from './components/SideNav/SideNav';
 import AppBody from './components/AppBody/AppBody';
 import moment from 'moment';
 import PrintThisComponent from '../src/components/Functionality/print';
+import PrintTemplate from 'react-print';
+import ReactDom from 'react-dom';
+import './App.css';
 
 
 
@@ -88,13 +91,17 @@ class App extends Component {
 
     return (
       <MuiThemeProvider>
-      <div>
+      <div id="react-no-print">
           <MenuBar {...menuProps}/>
           <SideNav {...navProps} />
+
+          </div>
+          <div>
           <AppBody 
             {...bodyProps}
           />
-          
+          </div>
+          <div id ="react-no-print">
         <PrintThisComponent/>
         {/* <div>
           <button onClick={this.handlePreviousDate.bind(this)}>Previous</button>
