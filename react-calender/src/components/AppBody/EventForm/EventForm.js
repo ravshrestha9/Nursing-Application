@@ -118,7 +118,6 @@ class EventForm extends React.Component {
           end: new Date(this.state.endDate + " " + this.state.endTime),
         });
     }
-    console.log("here");
   }
 
   componentWillReceiveProps(newProps) {

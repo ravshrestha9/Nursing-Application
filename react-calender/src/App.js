@@ -4,12 +4,14 @@ import MenuBar from "./components/MenuBar/MenuBar";
 import SideNav from "./components/SideNav/SideNav";
 import AppBody from "./components/AppBody/AppBody";
 import moment from "moment";
+import Button from "material-ui/Button";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedIn: this.props.loggedIn,
+      handleLogOut: this.props.handleLogOut,
       currentDate: new Date(),
       currentView: "month",
       sideNavOpen: false
@@ -26,7 +28,7 @@ class App extends Component {
   };
 
   handleNextDate = () => {
-    if (this.state.currentView === "month") {
+    if (this.state.currentView === "month" || this.state.currentView === "agenda") {
       let currentMonth = this.state.currentDate.getMonth();
       let currentYear = this.state.currentDate.getFullYear();
       let nextDate = new Date(currentYear, currentMonth + 1);
@@ -47,7 +49,7 @@ class App extends Component {
   };
 
   handlePreviousDate = () => {
-    if (this.state.currentView === "month") {
+    if (this.state.currentView === "month" || this.state.currentView === "agenda") {
       let currentMonth = this.state.currentDate.getMonth();
       let currentYear = this.state.currentDate.getFullYear();
       let nextDate = new Date(currentYear, currentMonth - 1);
@@ -92,7 +94,7 @@ class App extends Component {
       currentDate: this.state.currentDate,
       currentView: this.state.currentView,
       onViewChange: this.handleViewChange,
-      loggedIn: this.props.loggedIn
+      loggedIn: this.props.loggedIn,
     };
 
     const navProps = {
@@ -103,13 +105,23 @@ class App extends Component {
     if (!this.props.loggedIn) {
       return null;
     }
-
+    console.log(this.props.handleLogOut);
     return (
-      <MuiThemeProvider>
+      
+      <MuiThemeProvider >
         <div>
           <MenuBar {...menuProps} />
           <SideNav {...navProps} />
+          {/*AppBodyRouters*/}
           <AppBody {...bodyProps} />
+          <Button
+              variant="raised"
+              size="large"
+              color="primary"
+              onClick={this.handleLogOut}
+            >
+              Submit
+            </Button>
         </div>
       </MuiThemeProvider>
     );

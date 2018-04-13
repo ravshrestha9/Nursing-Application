@@ -6,4 +6,17 @@
     line-height: calc(1.1em + 0.5vw);
   } */
 
+  .rbc-month-row, .rbc-event-content {
+    overflow: visible !important;
+    /* z-index: auto !important; */
+  }
+  .rbc-row-content {
+    /* z-index: auto !important; */
+  }
+
+  .rbc-row-segment {
+    position: relative !important;
+    /* z-index: auto ; */
+  }
+
   

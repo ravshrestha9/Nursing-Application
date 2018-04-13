@@ -11,6 +11,8 @@ import { withStyles } from 'material-ui/styles';
 import KeyboardArrowLeftIcon from "material-ui-icons/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "material-ui-icons/KeyboardArrowRight";
 import Select from 'material-ui/Select';
+import Login from '../Login'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import styles from './MenuBarStyle';
 import './MenuBar.css';
@@ -28,9 +30,14 @@ class MenuBar extends Component {
         return '' + month  + ' ' + year;
     }
 
+    handleLogOut = () =>{
+        console.log("here");
+        this.props.history.pushState(null, "/");
+    }
+
     render() {
         const { classes } = this.props;
-        
+        console.log(this.props);
         return (
             <AppBar
                 className={classNames(classes.appBar, {
@@ -93,7 +100,7 @@ class MenuBar extends Component {
                         <MenuItem value="agenda">Agenda</MenuItem>
                     </Select>
                           
-                    <Button color="inherit">{this.props.loggedIn?'LogOut':'LogIn'}</Button>
+                    <Button color="inherit" onClick = {this.props.handleLogOut}> {this.props.loggedIn?'LogOut':'LogIn'}</Button>
                 </Toolbar>
             </AppBar>
         )

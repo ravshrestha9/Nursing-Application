@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
-// import Selectable from './selectable'
+import EventPopup from "./EventPopup";
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import EventFormContext from './event-form-context'; 
 
 import "./Calendar.css";
+import CustomEvent from './CustomEvent'
 
 BigCalendar.momentLocalizer(moment);
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
@@ -13,21 +17,24 @@ class Calendar extends Component {
     super(props);
     this.state = {
       events: [],
-      selectedDay: ""
+      selectedEvent: {},
+      openEventPopup: false,
+      eventPopupPos: {}
     };
   }
 
+  handleCloseEventPopup = ()=>{
+    this.setState({openEventPopup: false});
+  }
+
+  handleOpenEventPopup = ()=>{
+    this.setState({openEventPopup: true});
+  }
+
   render() {
-    let EventAgenda = (
-      <div 
-      style={{ color: 'magenta' }}>
-      {this.props.events.title}
-      {this.props.events.desc}</div>
-    );
-      
+    const {onOpenEventForm} = this.props;
     return (
       <BigCalendar
-        // events={this.props.events}
         views={allViews}
         selectable
         view={this.props.currentView}
@@ -38,39 +45,18 @@ class Calendar extends Component {
         popup
         events={this.props.events}
         style={{ height: "90vh", padding: 0, margin: 0 }}
-        onSelectEvent={event =>
-          alert(
-            event.id +
-              "\n" +
-              event.title +
-              "\n" +
-              event.start +
-              "\n" +
-              event.end +
-              "\n" +
-              event.desc +
-              "\n" +
-              event.location
-          )
-        }
-        onSelectSlot={slotInfo =>
-          alert(
-            `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-              `\nend: ${slotInfo.end.toLocaleString()}` +
-              `\naction: ${slotInfo.action}`
-          )
-        }
-        dayPropGetter={this.props.customDayPropGetter}
-        slotPropGetter={this.props.customSlotPropGetter}
-        components={{
-          event: this.props.events,
-          agenda: {
-            event: EventAgenda
-          }
-        }}
+        components = {{event: CustomEvent}}
+        onDoubleClickEvent = {onOpenEventForm}
+        onDoubleClickSlot = {()=>console.log('double click')}
       />
     );
   }
 }
 
 export default Calendar;
+
+// <EventPopup open={this.state.openEventPopup} 
+//         event={this.state.selectedEvent} 
+//         position = {this.state.eventPopupPos}
+//         onCloseEventPopup = {this.handleCloseEventPopup}
+//       />

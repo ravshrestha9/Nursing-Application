@@ -34,6 +34,14 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+  list: {
+    width: 250,
+  },
+  root: {
+    width: '100%',
+    maxWidth: '360px',
+    backgroundColor: theme.palette.background.paper,
+  },
   
 
 });

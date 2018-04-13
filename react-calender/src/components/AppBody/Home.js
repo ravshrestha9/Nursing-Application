@@ -4,15 +4,16 @@ import Calendar from "./Calendar";
 import AddIcon from "material-ui-icons/Add";
 // import RequestForm from "../RequestForm/RequestForm";
 import EventForm from "./EventForm/EventForm";
-import events from './events';
 import axios from 'axios';
+import {EventFormContext} from './event-form-context';
+
 import "./Home.css";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        events: events,
+        events: [],
         openEventForm: false,
         role: 'admin'
     };
@@ -26,6 +27,7 @@ class Home extends Component {
     if (role !== 'admin') {
       requestURL = `http://35.185.78.228/calendar/events?cwid=${cwid}&role=${role}`;
     }
+    console.log(requestURL);
     axios({
       method: 'get',
       url: requestURL
@@ -35,56 +37,69 @@ class Home extends Component {
       let newEvents = data.map((event)=>{
         return {
           id: (event.EventScheduleId + 20),
-          title: event.Course + ' ' + 'Room: ' + event.Location,
+          title: event.Course + ' ' + 'Rm: ' + event.Location,
           start: new Date(event.EventStart),
           end: new Date(event.EventEnd),
           desc: event.Notes,
           location: event.Location
         };
-      }); 
-      this.setState({events: this.state.events.concat(newEvents)});
-      
+      });   
+      let curEvents = [this.state.events];
+      this.setState({events: curEvents.concat(newEvents)});
     })
     .catch((err)=>{
       console.log("Error parsing response: " + err);
     });
   }
   
-  addEvent(newEvent){
-    this.setState({events: this.state.events.concat([newEvent])});
+  addEvent = (newEvent) => {
+    let curEvents = {...this.state.events};
+    this.setState({events: curEvents.concat([newEvent])});
   }
 
-  closeEventForm(){
+  closeEventForm = ()=>{
     this.setState({openEventForm: false});
   }
 
-  handleOpenEventForm(){
+  handleOpenEventForm = () => {
     this.setState({openEventForm: true});
   }
 
+  
   render() {
     let button = (
-        <div>
+      <div>
         <Button
             variant="fab"
             color="secondary"
             aria-label="add"
             id="addCourse"
-            onClick={this.handleOpenEventForm.bind(this)}
-          >
+            onClick={this.handleOpenEventForm}
+        >
             <AddIcon />
-          </Button>
-         <EventForm open={this.state.openEventForm} 
-            addEvent={this.addEvent.bind(this)} 
-            closeEventForm={this.closeEventForm.bind(this)}
-          />
-          </div>
+        </Button>
+        <EventForm open={this.state.openEventForm} 
+            addEvent={this.addEvent} 
+            closeEventForm={this.closeEventForm}
+        />
+      </div>
     )
+    let eventFormContexts = {
+      openEventForm: this.state.openEventForm,
+      role: this.state.role,
+      handleOpenEventForm: this.handleOpenEventForm,
+    };
 
     if (this.props.loginInfo.role === 'student' || this.props.loginInfo.role === "crnInstructor") button = null;
     return (
         <div id="calendar-container">
-          <Calendar events={this.state.events} {...this.props} />
+          <EventFormContext.Provider value={eventFormContexts} >
+              <Calendar
+                events={this.state.events}
+                onOpenEventForm={this.handleOpenEventForm} 
+                {...this.props}
+              />
+          </EventFormContext.Provider>
           {button}
         </div>
     );
