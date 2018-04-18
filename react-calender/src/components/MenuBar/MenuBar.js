@@ -31,13 +31,11 @@ class MenuBar extends Component {
     }
 
     handleLogOut = () =>{
-        console.log("here");
         this.props.history.pushState(null, "/");
     }
 
     render() {
         const { classes } = this.props;
-        console.log(this.props);
         return (
             <AppBar
                 className={classNames(classes.appBar, {

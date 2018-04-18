@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/datetime-picker": "^2.0.5",
     "axios": "^0.18.0",
     "create-react-context": "^0.2.1",
     "history": "^4.7.2",

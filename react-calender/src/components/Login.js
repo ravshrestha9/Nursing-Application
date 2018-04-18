@@ -24,9 +24,9 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      role: "",
+      role: "admin",
       cwid: "",
-      loggedIn: false
+      loggedIn: true
     };
   }
   handleChange = event => {

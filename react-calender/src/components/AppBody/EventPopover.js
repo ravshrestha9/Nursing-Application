@@ -13,7 +13,8 @@ import IconButton from "material-ui/IconButton";
 import HomeIcon from "material-ui-icons/Home";
 import AccessTimeIcon from "material-ui-icons/AccessTime";
 import DateRangeIcon from "material-ui-icons/DateRange";
-import Menu, { MenuItem } from 'material-ui/Menu';
+import Menu, { MenuItem } from "material-ui/Menu";
+import EventNoteIcon from "material-ui-icons/EventNote";
 
 const styles = {
   card: {
@@ -21,8 +22,7 @@ const styles = {
   },
   title: {
     fontSize: 18,
-    marginLeft: 20,
-    position: "absolute"
+    marginLeft: 40
   },
   pos: {
     marginBottom: 12
@@ -30,14 +30,14 @@ const styles = {
   header: {
     height: 90,
     backgroundColor: "silver",
-    position: 'relative'
+    position: "relative"
   },
   content: {
     minHeight: 90,
     maxHeight: 400,
-    overflow: 'auto',
-    margin:0,
-    padding: 20
+    overflow: "auto",
+    margin: 0,
+    // padding: 20,
   },
   button: {
     position: "absolute",
@@ -60,112 +60,134 @@ const styles = {
     cursor: "pointer"
   },
   icon: {
-    verticalAlign: 'top'
+    verticalAlign: "middle",
+    color: "gray",
+    
   },
   desc: {
-    verticalAlign: 'middle', 
-    marginLeft:10
+    verticalAlign: "middle",
+    marginLeft: 20,
+    fontSize: "14px !important"
   }
-
 };
 
-class EventPopover extends React.Component{
-    state = {
-        anchorEl: null,
-        openModifyForm: false
-      };
-    
-      handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
-      };
-    
-      handleClose = () => {
-        this.setState({ anchorEl: null });
-      };
-    
+class EventPopover extends React.Component {
+  state = {
+    anchorEl: null,
+    openModifyForm: false
+  };
+
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
       
-   render() {
-      const { anchorEl } = this.state;
-      const { classes } = this.props;
-      const {event, onCloseEventPopover, handleOpenEventForm} = this.props;
-      const parsedTitle = event.title.split(" ");
-      return (
-        <div>
-          <Card
-            className={classes.card}
-          >
-            <CardHeader
-              className={classes.header}
-              action={
-                <IconButton onClick={onCloseEventPopover}>
-                  <CloseIcon />
-                </IconButton>
-              }
-              title = {
-                <Typography className={classes.title}>
-                  {parsedTitle[0] + " " + parsedTitle[1]} 
-                </Typography>
-              }
-            />
-            <CardContent className = {classes.content}>
-              <div className={classes.title}>
-                <div>
-                    <HomeIcon className={classes.icon}/> 
-                    <span className={classes.desc}>
-                        Room : {event.location}
-                    </span>
+  render() {
+    const { anchorEl } = this.state;
+    const { classes } = this.props;
+    const { event, onCloseEventPopover, handleOpenEventForm } = this.props;
+    console.log(event);
+    const parsedTitle = event.title.split(" ");
+    let adjustWidth = "58px";
 
-                    <DateRangeIcon className={classes.icon} style = {{marginLeft: 37}}/> 
-                    <span className={classes.desc}>
-                         Date: {moment(event.start).format("ll")}
-                    </span>
-                </div> 
-                <div>
-                    <AccessTimeIcon className={classes.icon}/> 
-                    <span className={classes.desc}>
-                         Start: {moment(event.start).format("LT")}
-                    </span>
+    if (event.room === '236 A' ||event.room === '236 B' || event.room === '236 C')
+    {
+      adjustWidth = "44px";
+    }
 
-                    <AccessTimeIcon className={classes.icon} style = {{marginLeft: 15}}/> 
-                    <span className={classes.desc}>
-                         End: {moment(event.end).format("LT")}
-                    </span>
- 
-                </div> 
-                <p></p>
-                <p>Desc: {event.desc}</p>
+    return (
+      <div>
+        <Card className={classes.card}>
+          <CardHeader
+            className={classes.header}
+            style={{ backgroundColor: event.color }}
+            action={
+              <IconButton onClick={onCloseEventPopover}>
+                <CloseIcon />
+              </IconButton>
+            }
+            title={
+              <Typography className={classes.title}>
+                {parsedTitle[0] + " " + parsedTitle[1]}
+              </Typography>
+            }
+          />
+          <CardContent className={classes.content}>
+            <div >
+              <div style={{display:'flex'}}>
+                <div>
+                  <HomeIcon className={classes.icon} />
+                  <span className={classes.desc}>Room : {event.room}</span>
+                </div>
+                <div>
+                  <DateRangeIcon className={classes.icon} style={{marginLeft: adjustWidth}}/>
+                  <span className={classes.desc} >
+                    Date: {moment(event.start).format("ll")}
+                  </span>
+                </div>
               </div>
-            </CardContent>
-        
-            <Button
-                variant="fab"
-                mini
-                color="secondary"
-                aria-label="add"
-                className={classes.button}
-                onClick = {(e)=>{onCloseEventPopover(e, handleOpenEventForm)}}
+              <div>
+                <AccessTimeIcon className={classes.icon} />
+                <span className={classes.desc}>
+                  Start: {moment(event.start).format("LT")}
+                </span>
+
+                <AccessTimeIcon className={classes.icon}
+                style={{marginLeft: 40}}
+                />
+                <span className={classes.desc}>
+                  End: {moment(event.end).format("LT")}
+                </span>
+              </div>
+              <EventNoteIcon className={classes.icon} />
+              <span className = {classes.desc}> Desc: {event.desc} </span>
+            </div>
+          </CardContent>
+
+          <Button
+            variant="fab"
+            mini
+            style={{ backgroundColor: event.color }}
+            aria-label="add"
+            className={classes.button}
+            onClick={e => {
+              onCloseEventPopover(e, handleOpenEventForm);
+            }}
+          >
+            <CreateIcon />
+          </Button>
+          <IconButton className={classes.delete} aria-label="Delete">
+            <DeleteIcon />
+          </IconButton>
+          <IconButton
+            className={classes.vert}
+            aria-label="MoreVert"
+            onClick={this.handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={this.handleClose}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          >
+            <MenuItem
+              onClick={e => {
+                onCloseEventPopover(e, handleOpenEventForm);
+              }}
             >
-                <CreateIcon />
-            </Button>
-            <IconButton className={classes.delete} aria-label="Delete">
-                <DeleteIcon />
-            </IconButton>
-            <IconButton className={classes.vert} aria-label="MoreVert" onClick={this.handleClick}>
-                <MoreVertIcon />
-            </IconButton>
-            <Menu
-                 id="simple-menu"
-                 anchorEl={anchorEl}
-                 open={Boolean(anchorEl)}
-                 onClose={this.handleClose}
-                 anchorOrigin = {{vertical:'top', horizontal: 'right'}}
-            >
-                <MenuItem  onClick={(e)=>{onCloseEventPopover(e, handleOpenEventForm)}}>Duplicate</MenuItem>
-           </Menu>
-          </Card>
-        </div>
-      );
-    };
+              Duplicate
+            </MenuItem>
+          </Menu>
+        </Card>
+      </div>
+    );
+  }
 }
 
 EventPopover.propTypes = {
@@ -173,5 +195,3 @@ EventPopover.propTypes = {
 };
 
 export default withStyles(styles)(EventPopover);
-
-

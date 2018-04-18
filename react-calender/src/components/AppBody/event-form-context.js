@@ -5,5 +5,6 @@ import createReactContext from 'create-react-context';
 export const EventFormContext = createReactContext({
     openEventForm: false,
     handleOpenEventForm: () => {},
-    role: ''
+    role: '',
+    view: ''
 });

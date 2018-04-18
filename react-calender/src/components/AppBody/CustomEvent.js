@@ -8,7 +8,6 @@ import { EventFormContext } from "./event-form-context";
 
 const styles = {
   content: {
-    backgroundColor: "teal",
     fontSize: "12px"
   }
 };
@@ -46,13 +45,31 @@ class CustomEvent extends React.Component {
     const { classes } = this.props;
     const { openEventPopover, anchorEl } = this.state;
 
+    let monthViewCustomEvent = (
+    <div className={classes.content} onClick={this.handleEventClick}>
+      <strong>{moment(event.start).format("ha")}</strong> {event.title}
+    </div>
+    )
+
+    let otherViewCustomEvent = (
+      <div className={classes.content} onClick={this.handleEventClick}>
+         {event.title} Desc:{event.desc}
+      </div>
+      )
+
+      let agendaViewCustomEvent = (
+        <div className={classes.content} onClick={this.handleEventClick}>
+           {event.title} 
+        </div>
+        )
+
     return (
       <EventFormContext.Consumer>
-        {({ openEventForm, handleOpenEventForm, role }) => (
+        {({ openEventForm, handleOpenEventForm, role , view}) => (
           <React.Fragment>
-            <div className={classes.content} onClick={this.handleEventClick}>
-              <strong>{moment(event.start).format("ha")}</strong> {event.title}
-            </div>
+           {view === 'month' && monthViewCustomEvent}
+           {(view === 'week' || view === 'day') && otherViewCustomEvent}
+           {view === 'agenda' && agendaViewCustomEvent}
             <Popover
               open={openEventPopover}
               anchorEl={anchorEl}

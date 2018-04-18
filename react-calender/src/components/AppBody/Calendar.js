@@ -31,12 +31,27 @@ class Calendar extends Component {
     this.setState({openEventPopup: true});
   }
 
+  eventStyleGetter = (event, start, end, isSelected) => {
+    var backgroundColor = event.color;
+    var style = {
+        backgroundColor: backgroundColor,
+        borderRadius: '0px',
+        opacity: 0.8,
+        color: 'black',
+        border: '0px',
+        display: 'block'
+    };
+    return {
+        style: style
+    };
+}
+
   render() {
     const {onOpenEventForm} = this.props;
     return (
       <BigCalendar
         views={allViews}
-        selectable
+
         view={this.props.currentView}
         showMultiDayTimes
         date={this.props.currentDate}
@@ -48,6 +63,7 @@ class Calendar extends Component {
         components = {{event: CustomEvent}}
         onDoubleClickEvent = {onOpenEventForm}
         onDoubleClickSlot = {()=>console.log('double click')}
+        eventPropGetter= {(this.eventStyleGetter)}
       />
     );
   }

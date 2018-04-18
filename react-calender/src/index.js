@@ -14,7 +14,7 @@ require("react-big-calendar/lib/css/react-big-calendar.css")
 // const store = createStore(reducer);
 
 ReactDOM.render(
-    (<LetterAvatars/>), document.getElementById('root'));
+    (<Login/>), document.getElementById('root'));
 // registerServiceWorker();
 
 {/* <Router>

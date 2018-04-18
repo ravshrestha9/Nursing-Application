@@ -11,7 +11,6 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: this.props.loggedIn,
-      handleLogOut: this.props.handleLogOut,
       currentDate: new Date(),
       currentView: "month",
       sideNavOpen: false
@@ -105,7 +104,6 @@ class App extends Component {
     if (!this.props.loggedIn) {
       return null;
     }
-    console.log(this.props.handleLogOut);
     return (
       
       <MuiThemeProvider >
@@ -114,14 +112,6 @@ class App extends Component {
           <SideNav {...navProps} />
           {/*AppBodyRouters*/}
           <AppBody {...bodyProps} />
-          <Button
-              variant="raised"
-              size="large"
-              color="primary"
-              onClick={this.handleLogOut}
-            >
-              Submit
-            </Button>
         </div>
       </MuiThemeProvider>
     );

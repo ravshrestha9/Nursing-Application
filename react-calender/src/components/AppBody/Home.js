@@ -28,7 +28,7 @@ class Home extends Component {
       requestURL = `http://35.185.78.228/calendar/events?cwid=${cwid}&role=${role}`;
     }
     console.log(requestURL);
-    axios({
+    axios({ 
       method: 'get',
       url: requestURL
     })
@@ -37,11 +37,12 @@ class Home extends Component {
       let newEvents = data.map((event)=>{
         return {
           id: (event.EventScheduleId + 20),
-          title: event.Course + ' ' + 'Rm: ' + event.Location,
+          title: event.Course + ' ' + 'Rm: ' + event.Room,
           start: new Date(event.EventStart),
           end: new Date(event.EventEnd),
-          desc: event.Notes,
-          location: event.Location
+          desc: event.Note1,
+          room: event.Room,
+          color: event.Color
         };
       });   
       let curEvents = [this.state.events];
@@ -88,6 +89,7 @@ class Home extends Component {
       openEventForm: this.state.openEventForm,
       role: this.state.role,
       handleOpenEventForm: this.handleOpenEventForm,
+      view: this.props.currentView
     };
 
     if (this.props.loginInfo.role === 'student' || this.props.loginInfo.role === "crnInstructor") button = null;

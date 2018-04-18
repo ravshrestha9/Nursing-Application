@@ -18,7 +18,9 @@ import { ListItemText } from "material-ui/List";
 import Checkbox from "material-ui/Checkbox";
 import Chip from "material-ui/Chip";
 import Paper from "material-ui/Paper";
+import {DatePicker} from "@atlaskit/datetime-picker"
 import './formStyle.css';
+import DateTimePicker from "@atlaskit/datetime-picker/dist/cjs/components/DateTimePicker";
 
 
 const styles = theme => ({
@@ -117,7 +119,7 @@ class EventForm extends React.Component {
               </Select>
             </FormControl>
             <TextField
-                  label="Title"
+                  label="Title"ddddd
                   name="title"
                   value={this.state.title}
                   onChange={this.handleTextChange}
@@ -154,6 +156,7 @@ class EventForm extends React.Component {
         </div>
         <div>
         <br/> <br/>
+        <DateTimePicker/>
             <TextField
               name="startDate"
               label="Start Date"
