@@ -61,7 +61,7 @@ class Login extends Component {
         }
       })
       .catch(err => {
-        alert("Enter the required fields");
+        alert("Enter the correct username or password");
       });
   };
 
