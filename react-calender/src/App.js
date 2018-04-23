@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+
 import MenuBar from "./components/MenuBar/MenuBar";
 import SideNav from "./components/SideNav/SideNav";
 import AppBody from "./components/AppBody/AppBody";
 import moment from "moment";
-import Button from "material-ui/Button";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedIn: this.props.loggedIn,
+      handleLogOut: this.props.handleLogOut,
       currentDate: new Date(),
       currentView: "month",
       sideNavOpen: false
@@ -76,16 +76,22 @@ class App extends Component {
     this.setState({ currentView: event.target.value });
   };
 
+  handleSideNavClose = () => {
+    this.setState({sideNavOpen: false});
+  }
+
   render() {
     const bodyProps = {
+      ...this.props,
       onNavigate: date => this.handleDateNavigate(date),
       currentDate: this.state.currentDate,
       currentView: this.state.currentView,
       sideNavOpen: this.state.sideNavOpen,
-      loginInfo: this.props
     };
 
     const menuProps = {
+      ...this.props,
+      onNavigate: date => this.handleDateNavigate(date),
       onSideNavDisplay: this.handleSideNavDisplay,
       onNextDate: this.handleNextDate,
       onPreviousDate: this.handlePreviousDate,
@@ -93,27 +99,22 @@ class App extends Component {
       currentDate: this.state.currentDate,
       currentView: this.state.currentView,
       onViewChange: this.handleViewChange,
-      loggedIn: this.props.loggedIn,
     };
 
     const navProps = {
+      ...this.props,
       open: this.state.sideNavOpen,
-      loginInfo: this.props
+      onSideNavClose: this.handleSideNavClose
     };
 
-    if (!this.props.loggedIn) {
-      return null;
-    }
+    console.log('app component');
     return (
-      
-      <MuiThemeProvider >
         <div>
-          <MenuBar {...menuProps} />
-          <SideNav {...navProps} />
-          {/*AppBodyRouters*/}
-          <AppBody {...bodyProps} />
+            <MenuBar {...menuProps}/>
+            <SideNav {...navProps}/>
+            {/*AppBodyRouters*/}
+            <AppBody {...bodyProps}/>
         </div>
-      </MuiThemeProvider>
     );
   }
 }

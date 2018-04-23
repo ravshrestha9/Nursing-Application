@@ -1,0 +1,28 @@
+.select {
+    background-color: rgb(112, 169, 207) !important;
+    color: white;
+}
+.pickers {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+
+.css-lq6feg {
+    /* position: relative !important; */
+}
+
+.css-btz639 {
+    /* position: relative !important; */
+}
+
+.css-zckpcq {
+    /* position: relative !important; */
+}
+
+.css-zckpcq > div:last-of-type {
+    /* border: 1px solid black;
+    z-index: 100000 !important; */
+    /* top: 400px !important; */
+    /* top: 0px !important; */
+}

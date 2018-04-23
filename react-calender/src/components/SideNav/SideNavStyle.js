@@ -2,9 +2,7 @@
 
 const drawerWidth = 240;
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
+
   appFrame: {
     height: '100%',
     zIndex: 1,
@@ -24,14 +22,17 @@ const styles = theme => ({
   drawerPaper: {
     position: 'absolute',
     width: drawerWidth,
-    backgroundColor: '#f2f1ef',
-    boxShadow: '7px 0px 22px -9px rgba(0,0,0,0.75)'
+    // backgroundColor: '#f2f1ef',
+    boxShadow: '7px 0px 22px -9px rgba(0,0,0,0.75)',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#2471A3'
   },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: '0 8px',
     ...theme.mixins.toolbar,
   },
   list: {

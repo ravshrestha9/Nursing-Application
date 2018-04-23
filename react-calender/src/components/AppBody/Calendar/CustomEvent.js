@@ -4,7 +4,8 @@ import { withStyles } from "material-ui/styles";
 import Paper from "material-ui/Paper";
 import Popover from "material-ui/Popover";
 import EventPopover from "./EventPopover";
-import { EventFormContext } from "./event-form-context";
+// import { EventFormContext } from "../event-form-context";
+import PropTypes from 'prop-types';
 
 const styles = {
   content: {
@@ -44,32 +45,14 @@ class CustomEvent extends React.Component {
     const event = this.props.event;
     const { classes } = this.props;
     const { openEventPopover, anchorEl } = this.state;
-
-    let monthViewCustomEvent = (
-    <div className={classes.content} onClick={this.handleEventClick}>
-      <strong>{moment(event.start).format("ha")}</strong> {event.title}
-    </div>
-    )
-
-    let otherViewCustomEvent = (
-      <div className={classes.content} onClick={this.handleEventClick}>
-         {event.title} Desc:{event.desc}
-      </div>
-      )
-
-      let agendaViewCustomEvent = (
-        <div className={classes.content} onClick={this.handleEventClick}>
-           {event.title} 
-        </div>
-        )
-
+    const {openEventForm, handleOpenEventForm} = this.context;
+    // <EventFormContext.Consumer>
+    // {({ openEventForm, handleOpenEventForm, role }) => (
     return (
-      <EventFormContext.Consumer>
-        {({ openEventForm, handleOpenEventForm, role , view}) => (
           <React.Fragment>
-           {view === 'month' && monthViewCustomEvent}
-           {(view === 'week' || view === 'day') && otherViewCustomEvent}
-           {view === 'agenda' && agendaViewCustomEvent}
+            <div className={classes.content} onClick={this.handleEventClick}>
+              <strong>{moment(event.start).format("ha")}</strong> {event.title}
+            </div>
             <Popover
               open={openEventPopover}
               anchorEl={anchorEl}
@@ -87,10 +70,15 @@ class CustomEvent extends React.Component {
               </div>
             </Popover>
           </React.Fragment>
-        )}
-      </EventFormContext.Consumer>
-    );
+      );
+    // )}
+      // </EventFormContext.Consumer>
   }
+}
+
+CustomEvent.contextTypes = {
+  openEventForm: PropTypes.bool,
+  handleOpenEventForm: PropTypes.func
 }
 
 export default withStyles(styles)(CustomEvent);

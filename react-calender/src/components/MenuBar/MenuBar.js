@@ -13,14 +13,17 @@ import KeyboardArrowRightIcon from "material-ui-icons/KeyboardArrowRight";
 import Select from 'material-ui/Select';
 import Login from '../Login'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import PropTypes from 'prop-types';
+import Calendar from '@atlaskit/calendar';
+import Popover from "material-ui/Popover";
 
 import styles from './MenuBarStyle';
 import './MenuBar.css';
 
 class MenuBar extends Component {
-    constructor(props){
-        super(props);
-        this.state = {};
+    state = {
+        openCalendar: false,
+        anchorEl: null
     }
 
     getDateLabel = (date) => {
@@ -31,31 +34,52 @@ class MenuBar extends Component {
     }
 
     handleLogOut = () =>{
-        this.props.history.pushState(null, "/");
+        this.context.actions.setLoggedOut();
+    }
+
+    handleCalendarPopup = (event) => {
+        this.setState({
+            openCalendar: true,
+            anchorEl: event.target
+        });
+    }
+
+    handleRequestClose = () => {
+        this.setState({
+            openCalendar: false
+        });
+    };
+
+    handleDateSelect = ({iso}) => {
+        this.handleRequestClose();
+        this.props.onNavigate(iso);
     }
 
     render() {
         const { classes } = this.props;
+        
         return (
             <AppBar
                 className={classNames(classes.appBar, {
                 })}
             >
-                <Toolbar>
+                <Toolbar style={{display: 'flex', flex: 1}}>
                     <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={this.props.onSideNavDisplay}
-                    // className={classNames(classes.menuButton, open && classes.hide)}
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={this.props.onSideNavDisplay}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="title" color="inherit" className="flex">
-                        Nursing Course Calendar
-                    </Typography>
 
-                    <div className="">
-                        <div className="navigateButtons">
+                    <Link to ="/" style={{textDecoration: 'none'}}>
+                        <Typography variant="title" style={{color:"#B6CFE0", fontSize:20}}>
+                            Nursing Calendar
+                        </Typography>
+                    </Link>
+
+
+                    <div className="navigateButtons">
                         <Button
                             color="inherit"
                             variant="fab"
@@ -81,29 +105,51 @@ class MenuBar extends Component {
                         >
                             <KeyboardArrowRightIcon style={{height:"30px", width:"30px"}}/>
                         </Button>
-                        </div>
+                    
+                   
+                        <Button
+                            color="inherit"
+                            style={{fontSize: '19px', width: '200px'}}
+                            onClick={this.handleCalendarPopup} 
+                        >
+                            {this.getDateLabel(this.props.currentDate)}
+                        </Button>
+
+                        <Popover
+                            open={this.state.openCalendar}
+                            anchorEl={this.state.anchorEl}
+                            anchorPosition= {{ vertical: "top", horizontal: "left" }}
+                            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                            elevation={5}
+                            onClose={this.handleRequestClose}
+                        >
+                            <Calendar selected={[this.props.currentDate]} onSelect={this.handleDateSelect}/>
+                        </Popover>
                     </div>
-                    <Typography variant="title" color="inherit" className="flex">
-                        <label className="dateLabel">{this.getDateLabel(this.props.currentDate)}</label>
-                    </Typography>
-                
-                    <Select
-                        value={this.props.currentView}            
-                        style= {{width:"170px", color:"white", textAlign:"center"}}
-                        onChange = {this.props.onViewChange}
-                    >
-                        <MenuItem value="month">Month</MenuItem>
-                        <MenuItem value="week">Week</MenuItem>
-                        <MenuItem value="day">Day</MenuItem>
-                        <MenuItem value="agenda">Agenda</MenuItem>
-                    </Select>
-                          
-                    <Button color="inherit" onClick = {this.props.handleLogOut}> {this.props.loggedIn?'LogOut':'LogIn'}</Button>
+                    <div style={{flexShrink:1, flexBasis:'20%'}}>
+                        <Select
+                            value={this.props.currentView}            
+                            style= {{width:"55%", color:"white", backgroundColor:'#5499C7', textAlign:"center"}}
+                            onChange = {this.props.onViewChange}
+                        >
+                            <MenuItem value="month">Month</MenuItem>
+                            <MenuItem value="week">Week</MenuItem>
+                            <MenuItem value="day">Day</MenuItem>
+                            <MenuItem value="agenda">Agenda</MenuItem>
+                        </Select>
+                       &nbsp;&nbsp;
+                        <Button style= {{width:"20%"}} color="inherit" onClick = {this.handleLogOut}> Logout </Button>
+                    </div>
                 </Toolbar>
             </AppBar>
         )
     }
 
 } 
+
+MenuBar.contextTypes = {
+    store: PropTypes.object,
+    actions: PropTypes.object
+};
 
 export default withStyles(styles, { withTheme: true })(MenuBar);

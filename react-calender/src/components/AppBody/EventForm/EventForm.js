@@ -10,6 +10,7 @@ import Typography from "material-ui/Typography";
 import CloseIcon from "material-ui-icons/Close";
 import Slide from "material-ui/transitions/Slide";
 import TextField from "material-ui/TextField";
+import { storeCalendarEvent } from "../../../services/services";
 
 const styles = {
   appBar: {
@@ -29,7 +30,6 @@ function Transition(props) {
 
 class EventForm extends React.Component {
   state = {
-    open: false,
     title: "",
     course: "",
     CRN: "",
@@ -51,7 +51,6 @@ class EventForm extends React.Component {
 
   handleClose = () => {
     this.setState({ 
-      open: false,
       title: "",
       course: "",
       CRN: "",
@@ -91,19 +90,9 @@ class EventForm extends React.Component {
       notes: this.state.notes 
     };
     console.log(events);
-    // console.log(this.state.startDate + " " + this.state.startTime);
-    // console.log(new Date(this.state.startDate + " " + this.state.startTime));
-    fetch('http://35.185.78.228/calendar/events', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(events)
-    }).then((resp)=>{
-      return resp.json();      
-    })
-    .then((data)=>{
-       console.log(data);     
+    storeCalendarEvent(events)
+    .then((response)=>{
+       console.log(response);     
     })
     .catch((err)=>{
       console.log("Error parsing response: " + err);
@@ -121,7 +110,7 @@ class EventForm extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({ open: newProps.open });
+    // this.setState({ open: newProps.open });
   }
  
   render() {
@@ -130,7 +119,7 @@ class EventForm extends React.Component {
       <div>
         <Dialog
           fullScreen
-          open={this.state.open}
+          open={this.props.open}
           onClose={this.handleClose}
           transition={Transition}
         >

@@ -4,7 +4,7 @@ import moment from "moment";
 import EventPopup from "./EventPopup";
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
-import EventFormContext from './event-form-context'; 
+// import EventFormContext from '../event-form-context'; 
 
 import "./Calendar.css";
 import CustomEvent from './CustomEvent'
@@ -51,10 +51,11 @@ class Calendar extends Component {
     return (
       <BigCalendar
         views={allViews}
-
+        selectable
         view={this.props.currentView}
+        onView={()=>{}}
         showMultiDayTimes
-        date={this.props.currentDate}
+        date={this.props.currentDate} 
         onNavigate={this.props.onNavigate}
         toolbar={false}
         popup

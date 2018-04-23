@@ -91,7 +91,7 @@ class EventPopover extends React.Component {
     const { event, onCloseEventPopover, handleOpenEventForm } = this.props;
     console.log(event);
     const parsedTitle = event.title.split(" ");
-    let adjustWidth = "58px";
+    let adjustWidth = "55px";
 
     if (event.room === '236 A' ||event.room === '236 B' || event.room === '236 C')
     {

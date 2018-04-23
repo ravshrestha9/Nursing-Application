@@ -1,10 +1,14 @@
 
-import React from 'react';
 import createReactContext from 'create-react-context'; 
 
-export const EventFormContext = createReactContext({
+export const EventFormContext = React.createContext({
     openEventForm: false,
     handleOpenEventForm: () => {},
-    role: '',
-    view: ''
+    role: ''
+});
+
+export const AppContext = React.createContext({
+    authorized: false,
+    user: {},
+    events: {}
 });

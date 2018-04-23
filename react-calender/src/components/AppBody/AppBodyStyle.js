@@ -7,6 +7,7 @@ const styles = theme => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
         }),
+        height: '85.5vh'
     },
     contentShift: {
         transition: theme.transitions.create('margin', {
