@@ -40,7 +40,7 @@ const styles = theme => ({
   },
   root: {
     width: '100%',
-    maxWidth: '360px',
+    maxWidth: '360px !important',
     backgroundColor: theme.palette.background.paper,
   },
   

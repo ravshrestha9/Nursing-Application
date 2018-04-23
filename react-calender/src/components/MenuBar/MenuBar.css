@@ -8,23 +8,22 @@
     margin-bottom:3px;
     /* flex-grow: 1; */
   }
-
- .dateLabel {
-     /* margin-left: 30px; */
-     display: inline-block; 
+  .dateLabel {
+    /* margin-left: 30px; */
+    display: inline-block; 
 } 
-
 .navigateButtons{
-    /* margin-left: 25px;
-    margin-right: 25px; */
-    flex: 2;
+    /*  */
+    flex:2;
     justify-content: flex-end;
-    align-items: center;
     align-items: center;
     border: 1px solid gray;
 }
-
- #back, #next{
+.title{
+    color: #fff !important;
+    font-size:24px;
+}
+#back, #next{
     fill: #fff;
     background: transparent;
     color:white;
@@ -32,5 +31,50 @@
 }
 
 #back:hover, #next:hover{
-    background: #66A3CE;
+    background: rgb(112, 157, 216);
 }
+
+  @media only screen and  (max-device-width : 1024px) {
+   
+    .MuiTypography-colorInherit-82{
+       
+        font-size: 0.875rem !important;
+    }
+    .MuiToolbar-gutters-40{
+        font-size: 0.875rem !important;
+        
+    } 
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 768px) {
+    .flex{
+        display: none !important;
+    }
+    .navigateButtons{
+        display: none !important;
+    }
+
+}
+
+/* @media only screen and (min-device-width : 48px) and (max-device-width : 768px) {
+    .flex{
+        display: none !important;
+     }
+     navigateButtons{
+        display: none !important;
+     }
+     
+     
+ } */
+
+.menuButton {
+    margin-left: -12;
+    margin-right: 20;
+  } 
+
+
+
+
+
+ 
+
+

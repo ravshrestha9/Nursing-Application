@@ -1,50 +1,103 @@
-.form-group{
+.form-group {
     display: flex;
     height: 80vh;
     justify-content: center;
-    align-items: center;  
-    /* background-color: #fff6a1; */
-} 
+    align-items: center;
+}
 
-.header{
+.background {
+    background-image: url("background1.jpg");
+    background-position: center;
+    background-size: cover;
+    
+    display: flex;
+}
+
+.form-group {
+    display: flex;
+}
+
+.header {
     height: 100px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#2471A3;
-    
+    background-color: #720d0d;
 }
 
-.span{
-    color:#ffffff; 
+.span {
+    color: #ffffff;
     font-size: 20px;
     font-weight: 100px;
 }
 
-.innerSpan{
-    font-weight:bold;
-    color: rgb(161, 206, 236);
+.innerSpan {
+    font-weight: bold;
+    color: #a74034 !important;
     font-size: 35px;
     float: center;
     padding-right: 10px;
 }
 
-.form-contents{
-    padding-top: 50px;  
+.container {
+    display: flex;
+    margin: 0 auto;
+    border: 2px solid #ffffff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
-.toolbar{
-    /* background-color: maroon; */
-    Height: 100px;
-    justify-content: center;
+
+.Paper {
+    margin: 12vh auto !important;
+    width: 50% !important;
+    height: 400px!important;
+    text-align: center !important;
 }
-.toolbar{
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+.Left{
+display:none;
+}
+.span ,.innerSpan{
+    font-size: 1em;
+}
+}
+.Left {
+    background-image: url("kitty.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: 100%; */
+    box-sizing: border-box;
+    /* background-blend-mode: soft-light; */
+    width: 50%;
+    height: 300px;
+}
+
+.form-contents {
+    padding: 25px 50px;
+}
+
+.toolbar {
     /* background-color: maroon; */
     Height: 100px;
     justify-content: center;
 }
 
-.img{
+.toolbar {
+    /* background-color: maroon; */
+    Height: 100px;
+    justify-content: center;
+}
+
+.img {
     height: 75px;
     padding-right: 30px;
 }
+
+/* .bg-img{
+    height:100%;
+    width: 50%; 
+    display: flex;
+    ove
+} */

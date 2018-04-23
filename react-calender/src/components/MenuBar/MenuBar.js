@@ -73,7 +73,7 @@ class MenuBar extends Component {
                     </IconButton>
 
                     <Link to ="/" style={{textDecoration: 'none'}}>
-                        <Typography variant="title" style={{color:"#B6CFE0", fontSize:20}}>
+                        <Typography variant="title" className="title" >
                             Nursing Calendar
                         </Typography>
                     </Link>
@@ -129,7 +129,7 @@ class MenuBar extends Component {
                     <div style={{flexShrink:1, flexBasis:'20%'}}>
                         <Select
                             value={this.props.currentView}            
-                            style= {{width:"55%", color:"white", backgroundColor:'#5499C7', textAlign:"center"}}
+                            style= {{width:"55%", color:"white", backgroundColor:'#720d0d', textAlign:"center"}}
                             onChange = {this.props.onViewChange}
                         >
                             <MenuItem value="month">Month</MenuItem>

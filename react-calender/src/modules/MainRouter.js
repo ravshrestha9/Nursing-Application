@@ -6,18 +6,24 @@ import App from '../App';
 import PrivateRoute from './PrivateRoute';
 import {MuiThemeProvider, createMuiTheme} from "material-ui/styles";
 
-const mytheme = createMuiTheme({
-    palette: {
-      primary: { main: "#2471A3" },
-      secondary: { main: "#5499C7" },
-    },
-  });
+// const mytheme = createMuiTheme({
+//     palette: {
+//       primary: { main: "#2471A3" },
+//       secondary: { main: "#5499C7" },
+//     },
+//   });
 // const mytheme = createMuiTheme({
 //     palette: {
 //       primary: { main: "#720d0d" },
 //       secondary: { main: "#a74034" },
 //     },
 //   });
+const mytheme = createMuiTheme({
+    palette: {
+      primary: { main: "#720d0d" },
+      secondary: { main: "#a74034" },
+    },
+  });
 
 export default class MainRouter extends React.Component{
     render(){   
