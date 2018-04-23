@@ -18,40 +18,40 @@ class Home extends Component {
     };
   }
  
-  componentDidMount(){
-    //api call to get the list of events
-    const {cwid, role} = {...this.props.loginInfo};
-    let requestURL = 'http://35.185.78.228/calendar/events';
+  // componentDidMount(){
+  //   //api call to get the list of events
+  //   const {cwid, role} = {...this.props.loginInfo};
+  //   let requestURL = 'http://35.185.78.228/calendar/events';
 
-    if (role !== 'admin') {
-      requestURL = `http://35.185.78.228/calendar/events?cwid=${cwid}&role=${role}`;
-    }
-    axios({
-      method: 'get',
-      url: requestURL
-    })
-    .then((response)=>{
-      let data = response.data;
-      let newEvents = data.map((event)=>{
-        return {
-          id: (event.EventScheduleId + 20),
-          title: event.Course + ' ' + 'Room: ' + event.location,
-          start: new Date(event.EventStart),
-          end: new Date(event.EventEnd),
-          desc: event.Notes,
-          location: event.Location
-        };
-      }); 
-      this.setState({events: this.state.events.concat(newEvents)});
+  //   if (role !== 'admin') {
+  //     requestURL = `http://35.185.78.228/calendar/events?cwid=${cwid}&role=${role}`;
+  //   }
+  //   axios({
+  //     method: 'get',
+  //     url: requestURL
+  //   })
+  //   .then((response)=>{
+  //     let data = response.data;
+  //     let newEvents = data.map((event)=>{
+  //       return {
+  //         id: (event.EventScheduleId + 20),
+  //         title: event.Course + ' ' + 'Room: ' + event.location,
+  //         start: new Date(event.EventStart),
+  //         end: new Date(event.EventEnd),
+  //         desc: event.Notes,
+  //         location: event.Location
+  //       };
+  //     }); 
+  //     this.setState({events: this.state.events.concat(newEvents)});
       
-    })
-    .catch((err)=>{
-      console.log("Error parsing response: " + err);
-    });
-  }
+  //   })
+  //   .catch((err)=>{
+  //     console.log("Error parsing response: " + err);
+  //   });
+  // }
   
   addEvent(newEvent){
-    this.setState({events: this.state.events.concat([newEvent])});
+     this.setState({events: this.state.events.concat([newEvent])});
   }
 
   closeEventForm(){

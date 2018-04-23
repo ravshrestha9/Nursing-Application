@@ -2,14 +2,17 @@ import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
 import React, { Component } from "react";
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-// import SimpleAppBar from './components/LoginBar/loginbar';
 import Paper from "material-ui/Paper";
 import axios from "axios";
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import PersonIcon from "material-ui-icons/Person";
+import LockIcon from "material-ui-icons/Lock";
+import {InputAdornment} from 'material-ui/Input';
 import './loginform.css';
 import App from "./App";
+
 
 const mytheme = createMuiTheme({
   palette: {
@@ -24,16 +27,19 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      role: "",
+      role: "admin",
       cwid: "",
-      loggedIn: false
+      loggedIn: false,
     };
   }
+
   handleChange = event => {
+  
     this.setState({
       [event.target.name]: event.target.value
     });
   };
+
 
   handleLogin = e => {
     axios
@@ -55,7 +61,7 @@ class Login extends Component {
         }
       })
       .catch(err => {
-        console.log(err);
+        alert("Enter the required fields");
       });
   };
 
@@ -71,20 +77,16 @@ class Login extends Component {
           </Toolbar>
         </AppBar>
       </div>
+
     )
 
     let LoginForm = (
-
-      <div className="form-group">
-
+      <div className="background">
         <Paper
+          className="Paper"
           style={{
-            paddingtop: 16,
+
             textAlign: 'center',
-            display: "center",
-            innerWidth: '200px',
-            width: "500px",
-            height: "400px"
           }}
         >
           <div className="header">
@@ -93,26 +95,40 @@ class Login extends Component {
               Nursing Calendar
             </span>
           </div>
+          <div className="container">
 
-          <div className="form-contents" style={{ paddingtop: 100 }}>
-            <TextField
-              label="Username"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-            <br /><br />
-            <TextField
-              label="Password"
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </div> <br /><br />
-          <Button variant="raised" color="primary" onClick={this.handleLogin}>
-            Login
-              </Button>
+            <div className="Left">
+
+            </div>
+            <div className="form-contents" style={{ paddingtop: 100 }}>
+
+
+              <TextField
+                label="Username"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start"><PersonIcon /></InputAdornment>,
+                }}
+              />
+
+              <br /><br />
+              <TextField
+                label="Password"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start"><LockIcon /></InputAdornment>,
+                }}
+              /><br /><br /><br /><br />
+              <Button variant="raised" color="primary" onClick={this.handleLogin}>
+                Login
+          </Button>
+            </div>
+          </div>
         </Paper>
       </div>
     )

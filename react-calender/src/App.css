@@ -1,29 +1,33 @@
 @media print {
-
     button {
         display: none !important;
     }
-    
-   .calendar-week .rbc-calendar {
-        height: auto !important;
+    .rbc-month-row {
+        height: 100% !important;
     }
-
-    .calendar-month .rbc-calendar {
-        height: 727px !important;
-        display: table !important;
-
+    .rbc-row-bg .rbc-day-bg {
+        height: 100% !important;
     }
-
-    .calendar-month .rbc-month-row {
-        display: table !important;
-        height: 100px !important;
-        width: 100% !important;
-    }
-
-    .calendar-month .rbc-month-view {
-        display: table !important;
-        height: 100px !important;
-        width: 100% !important;
-    }
-
 }
+.App {
+    text-align: center;
+  }
+  
+  
+  .App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .App-title {
+    font-size: 1.5em;
+  }
+  
+  .App-intro {
+    font-size: large;
+  }
+  
+  
+  
