@@ -34,6 +34,11 @@ const styles = theme => ({
   },
   button: {
       height: "40px !important"
+  },
+  header:{
+    paddingTop: 40,
+    textAlign: "center"
+
   }
 });
 
@@ -69,6 +74,11 @@ class AssignLeadInstructorForm extends React.Component {
     const { classes, theme } = this.props;
     return (
       <div >
+        <Typography
+        className={classes.header}
+        >
+          <h1> Assign Lead Instructor</h1>
+        </Typography>
       <div className = {classes.root}>
         <form autoComplete="off">
           <FormControl className={classes.formControl}>
