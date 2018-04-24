@@ -4,7 +4,9 @@ body {
   font-family: sans-serif;
 }
 @media print {
-  
+  .MenuBar-appBar-341,#addCourse{
+    display: none !important;
+  }
   .SideNav-drawerPaper-125
   {
     display: none !important;
