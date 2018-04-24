@@ -45,14 +45,32 @@ class CustomEvent extends React.Component {
     const event = this.props.event;
     const { classes } = this.props;
     const { openEventPopover, anchorEl } = this.state;
-    const {openEventForm, handleOpenEventForm} = this.context;
+    const {openEventForm, handleOpenEventForm, view} = this.context;
     // <EventFormContext.Consumer>
     // {({ openEventForm, handleOpenEventForm, role }) => (
+      let monthViewCustomEvent = (
+        <div className={classes.content} onClick={this.handleEventClick}>
+          <strong>{moment(event.start).format("ha")}</strong> {event.title}
+        </div>
+        )
+    
+        let otherViewCustomEvent = (
+          <div className={classes.content} onClick={this.handleEventClick}>
+             {event.title} Desc:{event.desc}
+          </div>
+          )
+    
+          let agendaViewCustomEvent = (
+            <div className={classes.content} onClick={this.handleEventClick}>
+               {event.title} 
+            </div>
+            )
+
     return (
           <React.Fragment>
-            <div className={classes.content} onClick={this.handleEventClick}>
-              <strong>{moment(event.start).format("ha")}</strong> {event.title}
-            </div>
+            {view === 'month' && monthViewCustomEvent}
+           {(view === 'week' || view === 'day') && otherViewCustomEvent}
+           {view === 'agenda' && agendaViewCustomEvent}
             <Popover
               open={openEventPopover}
               anchorEl={anchorEl}
@@ -78,7 +96,8 @@ class CustomEvent extends React.Component {
 
 CustomEvent.contextTypes = {
   openEventForm: PropTypes.bool,
-  handleOpenEventForm: PropTypes.func
+  handleOpenEventForm: PropTypes.func,
+  view: PropTypes.string
 }
 
 export default withStyles(styles)(CustomEvent);

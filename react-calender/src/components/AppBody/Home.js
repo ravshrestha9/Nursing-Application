@@ -6,8 +6,7 @@ import AddIcon from "material-ui-icons/Add";
 import EventFormContainer from "./Containers/EventFormContainer";
 import {getCalendarEvents} from '../../services/services';
 import PropTypes from 'prop-types';
-import * as jsPDF from "jspdf";
-import * as html2canvas from "html2canvas";
+
 
 
 
@@ -23,6 +22,7 @@ class Home extends Component {
  
   componentDidMount() {
     //api call to get the list of events
+
     const {events} = this.context.store;
     if (events.length !== 0) 
       return;
@@ -62,23 +62,12 @@ class Home extends Component {
     this.setState({openEventForm: true});
   }
 
-  exportDocument = () => {
-    const input = document.querySelector(".rbc-calendar");
-    html2canvas(input).then(canvas => {
-      var pdf = new jsPDF("l", "mm", "a4");
-      var imgData = canvas.toDataURL("image/jpeg", 1.0);
-
-      // due to lack of documentation; try setting w/h based on unit
-      pdf.addImage(imgData, "JPEG", 10, 10, 280, 190 ); // 180x150 mm @ (10,10)mm
-
-      pdf.save("Calendar.pdf");
-    });
-  };
-
+  
   getChildContext() {
     let eventFormContexts = {
       openEventForm: this.state.openEventForm,
       handleOpenEventForm: this.handleOpenEventForm,
+      view: this.props.currentView
     };
     return eventFormContexts;
   }
@@ -122,7 +111,9 @@ class Home extends Component {
 Home.childContextTypes = {
   openEventForm: PropTypes.bool,
   role: PropTypes.string,
-  handleOpenEventForm: PropTypes.func
+  handleOpenEventForm: PropTypes.func,
+  view: PropTypes.string
+
 }
 
 Home.contextTypes = {
