@@ -10,12 +10,13 @@ import Toolbar from "material-ui/Toolbar";
 import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import CloseIcon from "material-ui-icons/Close";
+import "./CreateUser.css";
 
 const styles = theme => ({
   root: {
     paddingTop: "40px",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   container: {
     display: "flex",
@@ -37,7 +38,7 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 120
-  }
+  },
 });
 
 class CreateUserForm extends React.Component {
@@ -47,7 +48,6 @@ class CreateUserForm extends React.Component {
     password: "",
     firstname: "",
     lastname: "",
-    role: ""
   };
 
   handleChange = event => {
@@ -60,7 +60,6 @@ class CreateUserForm extends React.Component {
       password: "",
       firstname: "",
       lastname: "",
-      role: ""
     });
     this.props.CloseCreateRoom();
   }
@@ -71,8 +70,15 @@ class CreateUserForm extends React.Component {
     return (
       <div className={classes.root}>
         <form className={classes.container} autoComplete="off">
+
+
+
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="CWID">CWID</InputLabel>
+            <Typography  >
+              <h1> Create User</h1>
+            </Typography>
+
+            <InputLabel htmlFor="CWID" className="MuiInputLabel-animated-205" >CWID</InputLabel>
             <Select
               value={this.state.CWID}
               onChange={this.handleChange}
@@ -130,24 +136,9 @@ class CreateUserForm extends React.Component {
             />{" "}
             <br />
             <br />
-            <Button color="inherit">Save</Button>
+            <Button color="#ff9e80">Save</Button>
           </FormControl>
           <br />
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="Role">Role</InputLabel>
-            <Select
-              value={this.state.role}
-              onChange={this.handleChange}
-              inputProps={{
-                name: "role",
-                id: "role"
-              }}
-            >
-              <MenuItem value={"admin"}>Admin</MenuItem>
-            </Select>
-            <br />
-            <br />
-          </FormControl>
         </form>
       </div>
     );
