@@ -33,7 +33,7 @@ class RootProvider extends React.Component {
         localStorage.setItem('token', token);
         setAuthorizationToken(token);
         const {user, authenticated, ...rest} = jwt.decode(token);
-        this.setState({authenticated: authenticated, user: user});
+        this.setState({authenticated: authenticated, user: user, events:[]});
     }
 
     setLoggedOut = () => {

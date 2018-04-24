@@ -23,6 +23,7 @@
   font-size: large;
 }
 
+<<<<<<< HEAD
 @media print {
 
   button {
@@ -112,13 +113,41 @@
     display: none !important;
   } */
 
+=======
+/* @media print {
+>>>>>>> a2ef7b17836efbf8f0ecaf094abcb9d3101ca8bb
   .SideNav-drawerPaper-125
   {
     display: none !important;
   }
-
+  .MuiAppBar-root-4{
+    display: none !important;
+  }
   .MuiToolbar-root-39
   {
+    background: #000;
     display: none !important;
   }
 }
+
+.calendar-week .rbc-calendar {
+  height: auto !important;
+}
+
+.calendar-month .rbc-calendar {
+  height: 727px !important;
+  display: table !important;
+
+}
+
+.calendar-month .rbc-month-row {
+  display: table !important;
+  height: 100px !important;
+  width: 100% !important;
+}
+
+.calendar-month .rbc-month-view {
+  display: table !important;
+  height: 100px !important;
+  width: 100% !important;
+} */

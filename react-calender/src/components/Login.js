@@ -10,18 +10,13 @@ import Typography from 'material-ui/Typography';
 import PersonIcon from "material-ui-icons/Person";
 import LockIcon from "material-ui-icons/Lock";
 import {InputAdornment} from 'material-ui/Input';
-import './loginform.css';
+import './Loginform.css';
 import { Redirect } from 'react-router';
 import { authenticate } from "../services/services";
 
 const styles = {
   paper: {
-    // paddingtop: 16,
     textAlign: 'center',
-    // display: "center",
-    // innerWidth: '200px',
-    // width: "500px",
-    // height: "400px"
   }
 };
 const mytheme = createMuiTheme({
@@ -45,15 +40,20 @@ class Login extends Component {
   };
 
   handleLogin = e => {
-    authenticate(this.state.username, this.state.password)
-      .then(response => {
-        if (response.status === 200) {
-          this.props.setLoggedIn(response.data.token);
-        }
-      })
-      .catch(err => {
-        alert("Enter a valid username and password!");
-      });
+    if(this.state.username && this.state.password){
+
+      authenticate(this.state.username, this.state.password)
+        .then(response => {
+          if (response.status === 200) {
+            this.props.setLoggedIn(response.data.token);
+          }
+        })
+        .catch(err => {
+          alert("Enter a valid username and password!");
+        });
+    } else{
+      alert("Enter username and password");
+    }
   };
 
   render() {
@@ -104,7 +104,7 @@ class Login extends Component {
 
 
               <TextField
-                label="Username"
+                label="Username/Cwid"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleChange}
