@@ -41,8 +41,6 @@ class AppBody extends Component {
                <Route path='/action/lead-instructor' render={(props)=><AssignLeadInstructor {...props} />}/>
                <Route path='/action/requests' render={(props)=><div>Requests Page</div>}/>
                <Route path='/view/logs' render={(props)=><div>Activity Logs</div>}/>
-               <Route path='/action/export' render={(props)=><div>Export</div>}/>
-               <Route path='/action/print' render={(props)=><div>Print Page</div>}/>
                <Route path='/action/archive' render={(props)=><div>Archive Page</div>}/>
             </div>
             
