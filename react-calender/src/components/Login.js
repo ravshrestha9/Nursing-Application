@@ -16,12 +16,7 @@ import { authenticate } from "../services/services";
 
 const styles = {
   paper: {
-    // paddingtop: 16,
     textAlign: 'center',
-    // display: "center",
-    // innerWidth: '200px',
-    // width: "500px",
-    // height: "400px"
   }
 };
 const mytheme = createMuiTheme({
