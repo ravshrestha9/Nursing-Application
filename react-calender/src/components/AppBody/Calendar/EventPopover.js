@@ -111,7 +111,7 @@ class EventPopover extends React.Component {
             }
             title={
               <Typography className={classes.title}>
-                {parsedTitle[0] + " " + parsedTitle[1]}
+                {parsedTitle[0] + " " + parsedTitle[1]}  CRN : {event.crn}
               </Typography>
             }
           />

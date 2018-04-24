@@ -236,6 +236,7 @@ class EventFormContainer extends React.Component {
         allDates.forEach((date, index)=>{
             let groupId = ( + new Date() ) * (index+1);
             this.state.selectedCrn.forEach((crn)=>{
+                console.log(this.state.idToSection[crn]);
                 let sectionId = + this.state.idToSection[crn];
                 let event = {...eventTemplate};
                 event.sectionId = sectionId;
@@ -251,20 +252,44 @@ class EventFormContainer extends React.Component {
         storeCalendarEvent(events)
             .then((response) => {
                 console.log(response.data);
+                getCalendarEvent()
+                .then((response)=>{
+                    let data = response.data;
+                    let newEvents = data.map((event)=>{
+                        return {
+                        id: event.GroupId || event.EventScheduleId,
+                        title: event.Course + ' ' + 'Rm: ' + event.Room,
+                        start: new Date(event.EventStart),
+                        end: new Date(event.EventEnd),
+                        desc: event.Note1 + " " + event.Note2,
+                        room: event.Room,
+                        color: event.Color,
+                        crn: event.crn
+                        };
+                    });   
+                    this.context.actions.setEvents(newEvents);
+                    this.handleFormClose();
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+
+                // if (this.state.title && this.state.startDate && this.state.endDate) {
+                //     this.context.actions.addEvent({
+                //         id: 1000,
+                //         title: this.state.title,
+                //         start: new Date(this.state.startDate + " " + this.state.startTime),
+                //         end: new Date(this.state.endDate + " " + this.state.endTime),
+                //     });
+                // }
             })
             .catch((err) => {
                 console.log("Error parsing response: " + err);
             });
 
-        // this.handleFormClose();
-        // if (this.state.title && this.state.startDate && this.state.endDate) {
-        //     this.props.addEvent({
-        //         id: 1000,
-        //         title: this.state.title,
-        //         start: new Date(this.state.startDate + " " + this.state.startTime),
-        //         end: new Date(this.state.endDate + " " + this.state.endTime),
-        //     });
-        // }
+        
+
+        
     }
 
     render() {
