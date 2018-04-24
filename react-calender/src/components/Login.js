@@ -10,7 +10,7 @@ import Typography from 'material-ui/Typography';
 import PersonIcon from "material-ui-icons/Person";
 import LockIcon from "material-ui-icons/Lock";
 import {InputAdornment} from 'material-ui/Input';
-import './loginform.css';
+import './Loginform.css';
 import { Redirect } from 'react-router';
 import { authenticate } from "../services/services";
 

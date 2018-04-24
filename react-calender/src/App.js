@@ -80,6 +80,12 @@ class App extends Component {
     this.setState({sideNavOpen: false});
   }
 
+  printDocument = () => {
+    this.setState({sideNavOpen: false}, ()=>{
+      window.print();
+    });
+  }
+
   render() {
     const bodyProps = {
       ...this.props,
@@ -104,7 +110,8 @@ class App extends Component {
     const navProps = {
       ...this.props,
       open: this.state.sideNavOpen,
-      onSideNavClose: this.handleSideNavClose
+      onSideNavClose: this.handleSideNavClose,
+      printDocument: this.printDocument
     };
 
     console.log('app component');
