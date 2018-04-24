@@ -32,13 +32,14 @@ class Home extends Component {
       let data = response.data;
       let newEvents = data.map((event)=>{
         return {
-          id: event.EventScheduleId,
+          id: event.GroupId || event.EventScheduleId,
           title: event.Course + ' ' + 'Rm: ' + event.Room,
           start: new Date(event.EventStart),
           end: new Date(event.EventEnd),
-          desc: event.Note1,
+          desc: event.Note1 + " " + event.Note2,
           room: event.Room,
-          color: event.Color
+          color: event.Color,
+          crn: event.crn
         };
       });   
       this.context.actions.setEvents(newEvents);
