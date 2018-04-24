@@ -23,27 +23,39 @@
   font-size: large;
 }
 
-@media print {
-
-  /* .rbc-month-row {
-      height: 100% !important;
-  }
-  .rbc-row-bg .rbc-day-bg {
-      height: 100% !important;
-  }
-
-  .MuiPaper-root-12 .MuiPaper-elevation0-14 .MuiDrawer-paper-131 .SideNav-drawerPaper-125 .MuiDrawer-paperAnchorLeft-132 .MuiDrawer-paperAnchorDockedLeft-136
-  {
-    display: none !important;
-  } */
-
+/* @media print {
   .SideNav-drawerPaper-125
   {
     display: none !important;
   }
-
+  .MuiAppBar-root-4{
+    display: none !important;
+  }
   .MuiToolbar-root-39
   {
+    background: #000;
     display: none !important;
   }
 }
+
+.calendar-week .rbc-calendar {
+  height: auto !important;
+}
+
+.calendar-month .rbc-calendar {
+  height: 727px !important;
+  display: table !important;
+
+}
+
+.calendar-month .rbc-month-row {
+  display: table !important;
+  height: 100px !important;
+  width: 100% !important;
+}
+
+.calendar-month .rbc-month-view {
+  display: table !important;
+  height: 100px !important;
+  width: 100% !important;
+} */

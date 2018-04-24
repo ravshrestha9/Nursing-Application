@@ -100,16 +100,6 @@ class SideNav extends Component {
     });
   };
 
-  printDocument = () =>
-  {
-    var content = document.querySelector(".rbc-calendar");
-var pri = document.getElementById("calendar-container").contentWindow;
-pri.document.open();
-pri.document.write(content.innerHTML);
-pri.document.close();
-pri.focus();
-pri.print();
-  }
 
   render() {
     const { classes, theme, open, onSideNavClose } = this.props;
@@ -131,7 +121,7 @@ pri.print();
           <ListItem
             button
             style={{ padding: 18 }}
-            onClick = {() => {window.print()}}
+            onClick = {this.props.printDocument}
           >
             <ListItemIcon>
               <PrintIcon />

@@ -36,7 +36,7 @@
 
   @media only screen and  (max-device-width : 1024px) {
    
-    .MuiTypography-colorInherit-82{
+    .MuiTypography-root-63{
        
         font-size: 0.875rem !important;
     }
@@ -51,6 +51,9 @@
     }
     .navigateButtons{
         display: none !important;
+    }
+    .MuiTypography-title-69{
+        display: none!important;
     }
 
 }
