@@ -4,6 +4,10 @@ import MenuBar from "./components/MenuBar/MenuBar";
 import SideNav from "./components/SideNav/SideNav";
 import AppBody from "./components/AppBody/AppBody";
 import moment from "moment";
+import './App.css';
+
+import ReactDOM from "react-dom";
+import PrintTemplate from "react-print";
 
 class App extends Component {
   constructor(props) {
@@ -109,11 +113,15 @@ class App extends Component {
 
     console.log('app component');
     return (
-        <div>
+      <div>
+        <div id="react-no-print">
             <MenuBar {...menuProps}/>
             <SideNav {...navProps}/>
             {/*AppBodyRouters*/}
+            </div>
+            <div>
             <AppBody {...bodyProps}/>
+        </div>
         </div>
     );
   }

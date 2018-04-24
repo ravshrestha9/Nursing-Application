@@ -25,7 +25,82 @@
 
 @media print {
 
-  /* .rbc-month-row {
+  button {
+    display: none !important;
+  }
+.rbc-calendar{
+  position: relative !important;
+  right: 240px !important;
+
+}
+.rbc-month-view {
+  display: table !important;
+  width: 100px !important;
+  position: absolute !important;
+  height: 175px !important;
+}
+.rbc-month-header {
+  width: 750px !important;
+}
+.rbc-month-row {
+  height: 175px !important;
+  max-width: 750px !important;
+}
+.rbc-row-segment {
+  white-space: initial  !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.rbc-time-view {
+  width: 1000px !important;
+  overflow: hidden !important;
+}
+.rbc-time-content {
+  overflow: hidden !important;
+  width: 1000px !important;
+}
+.rbc-time-header {
+ width: 1000px !important;
+}
+
+/*
+
+  .rbc-month-view {
+    display: table !important;
+    height: 60px !important;
+  }
+
+  .rbc-calendar {
+    display: table !important;
+    height: 50px !important;
+    width: 10px !important;
+  }
+
+
+
+  .calendar-week .rbc-calendar {
+    height: auto !important;
+  }
+
+  .calendar-month .rbc-calendar {
+    height: 727px !important;
+    display: table !important;
+  }
+
+  .calendar-month .rbc-month-row {
+    display: table !important;
+    height: 100px !important;
+    width: 1500px !important;
+  }
+
+  .calendar-month .rbc-month-view {
+    display: table !important;
+    height: 100px !important;
+    width: 1500px !important;
+  }
+
+   .rbc-month-row {
       height: 100% !important;
   }
   .rbc-row-bg .rbc-day-bg {
