@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const styles = {
   content: {
     fontSize: "12px",
-    overflow: 'hidden'
+    overflow: 'hidden',
   }
 };
 

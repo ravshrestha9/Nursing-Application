@@ -40,15 +40,20 @@ class Login extends Component {
   };
 
   handleLogin = e => {
-    authenticate(this.state.username, this.state.password)
-      .then(response => {
-        if (response.status === 200) {
-          this.props.setLoggedIn(response.data.token);
-        }
-      })
-      .catch(err => {
-        alert("Enter a valid username and password!");
-      });
+    if(this.state.username && this.state.password){
+
+      authenticate(this.state.username, this.state.password)
+        .then(response => {
+          if (response.status === 200) {
+            this.props.setLoggedIn(response.data.token);
+          }
+        })
+        .catch(err => {
+          alert("Enter a valid username and password!");
+        });
+    } else{
+      alert("Enter username and password");
+    }
   };
 
   render() {
@@ -99,7 +104,7 @@ class Login extends Component {
 
 
               <TextField
-                label="Username"
+                label="Username/Cwid"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleChange}
