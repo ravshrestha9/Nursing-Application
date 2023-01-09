@@ -38,7 +38,7 @@
     "material-ui": "^1.0.0-beta.42",
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-icons-next": "^1.0.0-beta.17-next",
-    "material-ui-pickers": "^1.0.0-rc.6",
+    "material-ui-pickers": "^1.0.0-rc.17",
     "moment": "^2.20.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
